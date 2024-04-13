@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed1801b738a493d96198a48aaa748f5, type: 3}
+  m_Name: SummonerData
+  m_EditorClassIdentifier: 
+  <Minions>k__BackingField:
+  - MinionType: 1
+    Key: 49
+    Prefab: {fileID: 810628696374952886, guid: 033a89b2218918d4ea526a55466315e7, type: 3}
+    ClicksCountForSummon: 3
+    CurrentClicks: 0
+  - MinionType: 2
+    Key: 50
+    Prefab: {fileID: 4669471895805754607, guid: 0f6ae206b58981840a711fb8255777d1, type: 3}
+    ClicksCountForSummon: 6
+    CurrentClicks: 0
+  - MinionType: 3
+    Key: 51
+    Prefab: {fileID: 5429829045141920017, guid: 1b14675aad01d5841981111be9ee0469, type: 3}
+    ClicksCountForSummon: 9
+    CurrentClicks: 0

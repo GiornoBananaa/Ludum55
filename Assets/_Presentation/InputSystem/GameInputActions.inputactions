@@ -1,0 +1,29 @@
+{
+    "name": "GlobalIInputActions",
+    "maps": [
+        {
+            "name": "GlobalActionMap",
+            "id": "fc8ba853-0efa-487a-9f67-f8872a979658",
+            "actions": [],
+            "bindings": []
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "KeyboardMouse",
+            "bindingGroup": "KeyboardMouse",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
