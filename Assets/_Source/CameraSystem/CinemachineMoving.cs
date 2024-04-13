@@ -4,61 +4,36 @@ using UnityEngine;
 
 public class CinemachineMoving : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
-    [SerializeField] private GameObject army;
-    [SerializeField] private CinemachineVirtualCamera playerCamera;
-    [SerializeField] private CinemachineVirtualCamera armyCamera;
-
+    [SerializeField] private CinemachineVirtualCamera _currentCamera;
     private bool isSwitching = false;
     private float switchDuration = 0.5f;
-
-    private void Start()
+    
+    public void SwitchCamera(CinemachineVirtualCamera toCamera, Transform followTransform)
     {
-        playerCamera.Follow = player.transform;
-        armyCamera.Follow = null;
-        armyCamera.gameObject.SetActive(false);
+        StartCoroutine(SwitchingCamera(toCamera, followTransform));
     }
-
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(2) && !isSwitching)
-        {
-            if (playerCamera.gameObject.activeSelf)
-                StartCoroutine(SwitchCamera(playerCamera, armyCamera));
-            else if (armyCamera.gameObject.activeSelf)
-                StartCoroutine(SwitchCamera(armyCamera, playerCamera));
-        }
-    }
-
-    IEnumerator SwitchCamera(CinemachineVirtualCamera fromCamera, CinemachineVirtualCamera toCamera)
+    
+    public IEnumerator SwitchingCamera(CinemachineVirtualCamera toCamera, Transform followTransform)
     {
         isSwitching = true;
 
-        Vector3 startPos = fromCamera.transform.position;
+        Vector3 startPos = _currentCamera.transform.position;
         Vector3 endPos = toCamera.transform.position;
         float elapsedTime = 0f;
 
         while (elapsedTime < switchDuration)
         {
             float t = elapsedTime / switchDuration;
-            fromCamera.transform.position = Vector3.Lerp(startPos, endPos, t);
+            _currentCamera.transform.position = Vector3.Lerp(startPos, endPos, t);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        fromCamera.gameObject.SetActive(false);
+        _currentCamera.gameObject.SetActive(false);
         toCamera.gameObject.SetActive(true);
-
-        if (toCamera == playerCamera)
-        {
-            armyCamera.Follow = null;
-            playerCamera.Follow = player.transform;
-        }
-        else if (toCamera == armyCamera)
-        {
-            playerCamera.Follow = null;
-            armyCamera.Follow = army.transform;
-        }
+        
+        _currentCamera.Follow = null;
+        toCamera.Follow = followTransform;
 
         isSwitching = false;
     }
