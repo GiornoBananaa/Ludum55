@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CameraSystem
 {
@@ -11,7 +13,6 @@ namespace CameraSystem
         [Serializable]
         public class CameraData
         {
-            public CinemachineVirtualCamera VirtualCamera;
             public Transform CameraFollowObject;
         }
     
@@ -23,17 +24,25 @@ namespace CameraSystem
         private LinkedList<CameraData> _camerasInCircle;
         private LinkedListNode<CameraData> _currentCameraNode;
         private Coroutine _currentCoroutine;
-        private bool _isSwitching;
         private CameraData _cameraIndex;
-
+        
+        public bool IsMoving { get; private set; }
+        
         private void Awake()
         {
             _camerasInCircle = new LinkedList<CameraData>(_cameraDatas);
             _currentCameraNode = _camerasInCircle.First;
+            IsMoving = false;
+        }
+
+        private void Update()
+        {
+            Debug.Log(IsMoving);
         }
 
         public void MoveLeft()
         {
+            if(IsMoving) return;
             var currPos = _currentCamera.transform.position;
             Vector2 newPos = new Vector2(currPos.x-_camerasMinDistance,currPos.y);
             if(_currentCameraNode.Previous == null)
@@ -41,18 +50,19 @@ namespace CameraSystem
                 _currentCameraNode = _camerasInCircle.Last;
                 _camerasInCircle.RemoveLast();
                 _camerasInCircle.AddFirst(_currentCameraNode);
-                _currentCameraNode.Value.VirtualCamera.transform.position = newPos;
                 _currentCameraNode.Value.CameraFollowObject.position = newPos;
             }
             else
             {
                 _currentCameraNode = _currentCameraNode.Previous;
             }
-            SwitchCamera(_currentCameraNode.Value);
+            
+            MoveCamera(_currentCameraNode.Value.CameraFollowObject.transform.position);
         }
     
         public void MoveRight()
         {
+            if(IsMoving) return;
             var currPos = _currentCamera.transform.position;
             Vector2 newPos = new Vector2(currPos.x+_camerasMinDistance,currPos.y);
             if(_currentCameraNode.Next == null)
@@ -60,48 +70,20 @@ namespace CameraSystem
                 _currentCameraNode = _camerasInCircle.First;
                 _camerasInCircle.RemoveFirst();
                 _camerasInCircle.AddLast(_currentCameraNode);
-                _currentCameraNode.Value.VirtualCamera.transform.position = newPos;
                 _currentCameraNode.Value.CameraFollowObject.position = newPos;
             }
             else
             {
                 _currentCameraNode = _currentCameraNode.Next;
             }
-            SwitchCamera(_currentCameraNode.Value);
+            
+            MoveCamera(_currentCameraNode.Value.CameraFollowObject.transform.position);
         }
     
-        public void SwitchCamera(CameraData nextCamera)
+        public void MoveCamera(Vector2 position)
         {
-            if (_currentCoroutine != null)
-                StopCoroutine(_currentCoroutine);
-            StartCoroutine(SwitchingCamera(nextCamera));
-        }
-    
-        public IEnumerator SwitchingCamera(CameraData nextCamera)
-        {
-            _isSwitching = true;
-
-            Vector3 startPos = _currentCamera.transform.position;
-            Vector3 endPos = nextCamera.VirtualCamera.transform.position;
-            float elapsedTime = 0f;
-
-            while (elapsedTime < _switchDuration)
-            {
-                float t = elapsedTime / _switchDuration;
-                _currentCamera.transform.position = Vector3.Lerp(startPos, endPos, t);
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-
-            _currentCamera.gameObject.SetActive(false);
-            nextCamera.VirtualCamera.gameObject.SetActive(true);
-        
-            _currentCamera.Follow = null;
-            nextCamera.VirtualCamera.Follow = nextCamera.CameraFollowObject;
-
-            _currentCamera = nextCamera.VirtualCamera;
-
-            _isSwitching = false;
+            IsMoving = true;
+            _currentCamera.transform.DOMove(new Vector3(position.x,position.y,_currentCamera.transform.position.z),_switchDuration).OnComplete(()=>IsMoving=false);
         }
     }
 }

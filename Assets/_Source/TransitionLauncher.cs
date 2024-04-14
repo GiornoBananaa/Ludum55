@@ -26,9 +26,24 @@ public class TransitionLauncher : MonoBehaviour
         _leftButton.onClick.AddListener(MoveLeft);
         _rightButton.onClick.AddListener(MoveRight);
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            MoveLeft();
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            MoveRight();
+        }
+    }
+
     private void MoveLeft()
     {
+        if(_cineMachineMoving.IsMoving) 
+            return;
+            
         _current--;
         if (_current < 0)
         {
@@ -40,11 +55,15 @@ public class TransitionLauncher : MonoBehaviour
     
     private void MoveRight()
     {
+        if(_cineMachineMoving.IsMoving) 
+            return;
+        
         _current++;
         if (_current >= _gameScreens.Length)
         {
             _current = 0;
         }
+        
         _cineMachineMoving.MoveRight();
         _game.ChangeState(_gameScreens[_current]);
     }
