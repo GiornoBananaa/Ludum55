@@ -3,23 +3,23 @@ using UnityEngine;
 
 namespace ArmySystem
 {
-    public class UnitsPool<T> where T : Unit
+    public class ObjectPool<T> where T : MonoBehaviour
     {
         private HashSet<T> _activeObjects = new HashSet<T>();
         private Stack<T> _inactiveObjects = new Stack<T>();
-        private Dictionary<MinionType, T> _prefabs;
+        private T _prefab;
 
-        public UnitsPool(Dictionary<MinionType, T> prefabses)
+        public ObjectPool(T prefab)
         {
-            _prefabs = prefabses;
+            _prefab = prefab;
         }
         
-        public T GetObject(MinionType minionType)
+        public T GetObject()
         {
             T obj;
             if (_inactiveObjects.Count == 0)
             {
-                obj = Object.Instantiate(_prefabs[minionType]);
+                obj = Object.Instantiate(_prefab);
             }
             else
             {
