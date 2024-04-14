@@ -1,3 +1,4 @@
+using System;
 using Cinemachine;
 using System.Collections;
 using UnityEngine;
@@ -5,8 +6,8 @@ using UnityEngine;
 public class CinemachineMoving : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera _currentCamera;
+    [SerializeField] private float switchDuration = 0.3f;
     private bool isSwitching = false;
-    private float switchDuration = 0.5f;
     
     public void SwitchCamera(CinemachineVirtualCamera toCamera, Transform followTransform)
     {
@@ -34,6 +35,8 @@ public class CinemachineMoving : MonoBehaviour
         
         _currentCamera.Follow = null;
         toCamera.Follow = followTransform;
+
+        _currentCamera = toCamera;
 
         isSwitching = false;
     }
