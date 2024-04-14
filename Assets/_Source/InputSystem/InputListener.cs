@@ -43,7 +43,7 @@ namespace InputSystem
                 }
             }
         }
-        
+
         private void OnDestroy()
         {
             DisableReadingInput();
