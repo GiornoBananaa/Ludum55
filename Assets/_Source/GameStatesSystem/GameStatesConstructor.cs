@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
-using Cinemachine;
+using Core;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Core
+namespace GameStatesSystem
 {
     public class GameStatesConstructor : MonoBehaviour
     {
