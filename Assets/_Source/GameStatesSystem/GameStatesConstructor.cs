@@ -6,11 +6,11 @@ namespace GameStatesSystem
 {
     public class GameStatesConstructor : MonoBehaviour
     {
-        private Dictionary<GameScreen, IState<GameScreen>> _gameStates;
+        private Dictionary<GameScreen, GameState> _gameStates;
 
-        public Dictionary<GameScreen, IState<GameScreen>> Construct()
+        public Dictionary<GameScreen, GameState> Construct()
         {
-            _gameStates = new Dictionary<GameScreen, IState<GameScreen>>()
+            _gameStates = new Dictionary<GameScreen, GameState>()
             {
                 {GameScreen.DemonBodyChoice, new DemonBodyChoiceGameState()},
                 {GameScreen.DemonOutfitChoice, new DemonOutfitChoiceGameState()},

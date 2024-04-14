@@ -3,22 +3,21 @@ using PackagingGame;
 
 namespace GameStatesSystem
 {
-    public class PackagingGameState : IState<GameScreen>
+    public class PackagingGameState : GameState
     {
-        private IStateMachine<GameScreen> _owner;
-        private TapePutter _tapePutter;//TODO Save tapePutter
-        
-        public void SetOwner(IStateMachine<GameScreen> owner)
-        {
-            _owner = owner;
-        }
-        
-        public void Enter()
+        private TapePutter _tapePutter;
+        //TODO Save values in Game
+        public override void Enter()
         {
             
         }
 
-        public void Exit()
+        public override void Exit()
+        {
+            
+        }
+
+        public override void Reset()
         {
             
         }

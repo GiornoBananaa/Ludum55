@@ -2,23 +2,23 @@
 
 namespace GameStatesSystem
 {
-    public class DemonBodyChoiceGameState : IState<GameScreen>
+    public class DemonBodyChoiceGameState : GameState
     {
-        private IStateMachine<GameScreen> _owner;
+        private SwitchBodyParts _switchBodyParts;
         
-        public void SetOwner(IStateMachine<GameScreen> owner)
-        {
-            _owner = owner;
-        }
-
-        public void Enter()
+        public override void Enter()
         {
             
         }
 
-        public void Exit()
+        public override void Exit()
         {
             
+        }
+
+        public override void Reset()
+        {
+            _switchBodyParts.ResetDisplayImages();
         }
     }
 }

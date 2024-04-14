@@ -35,11 +35,6 @@ namespace CameraSystem
             IsMoving = false;
         }
 
-        private void Update()
-        {
-            Debug.Log(IsMoving);
-        }
-
         public void MoveLeft()
         {
             if(IsMoving) return;

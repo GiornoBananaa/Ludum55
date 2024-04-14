@@ -19,7 +19,7 @@ namespace PackagingGame
 
         private void Start()
         {
-            _defaultPosition = transform.position;
+            _defaultPosition = transform.localPosition;
             IsDragged = false;
             _normalScale = transform.localScale;
         }
@@ -52,7 +52,7 @@ namespace PackagingGame
         
         public void ReturnToDefaultPosition()
         {
-            transform.DOMove(_defaultPosition, 0.2f);
+            transform.DOLocalMove(_defaultPosition, 0.2f);
         }
     }
 }

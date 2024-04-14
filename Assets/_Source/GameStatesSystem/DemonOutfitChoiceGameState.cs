@@ -2,21 +2,19 @@
 
 namespace GameStatesSystem
 {
-    public class DemonOutfitChoiceGameState : IState<GameScreen>
+    public class DemonOutfitChoiceGameState : GameState
     {
-        private IStateMachine<GameScreen> _owner;
-        
-        public void SetOwner(IStateMachine<GameScreen> owner)
-        {
-            _owner = owner;
-        }
-
-        public void Enter()
+        public override void Enter()
         {
             
         }
 
-        public void Exit()
+        public override void Exit()
+        {
+            
+        }
+
+        public override void Reset()
         {
             
         }

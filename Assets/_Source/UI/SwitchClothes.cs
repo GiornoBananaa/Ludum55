@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class SwitchClothes : MonoBehaviour
 {
-    [SerializeField] private SwitchBodyParts _switchBodyParts;
-
     [SerializeField] private List<Sprite> _headClothesImages;
     [SerializeField] private List<Sprite> _bodyClothesImages;
     [SerializeField] private List<Sprite> _legsClothesImages;
@@ -25,9 +23,9 @@ public class SwitchClothes : MonoBehaviour
     [SerializeField] private Image _displayImageBody;
     [SerializeField] private Image _displayImageLegs;
 
-    public Sprite ImageHeadClothes;
-    public Sprite ImageBodyClothes;
-    public Sprite ImageLegsClothes;
+    public Sprite ImageHeadClothes => _headClothesImages[_currentIndexHead];
+    public Sprite ImageBodyClothes => _bodyClothesImages[_currentIndexBody];
+    public Sprite ImageLegsClothes => _legsClothesImages[_currentIndexLegs];
 
     private int _currentIndexHead = 0;
     private int _currentIndexBody = 0;
@@ -68,17 +66,10 @@ public class SwitchClothes : MonoBehaviour
         _currentIndexLegs = 0;
     }
 
-    public void SaveDisplayImages()
+    public void SetBodyParts(Sprite imageHead, Sprite imageBody, Sprite imageLegs)
     {
-        ImageHeadClothes = _headClothesImages[_currentIndexHead];
-        ImageBodyClothes = _bodyClothesImages[_currentIndexBody];
-        ImageLegsClothes = _legsClothesImages[_currentIndexLegs];
-    }
-
-    public void SetBodyParts()
-    {
-        _displayImageHead.sprite = _switchBodyParts.ImageHead;
-        _displayImageBody.sprite = _switchBodyParts.ImageBody;
-        _displayImageLegs.sprite = _switchBodyParts.ImageLegs;
+        _displayImageHead.sprite = imageHead;
+        _displayImageBody.sprite = imageBody;
+        _displayImageLegs.sprite = imageLegs;
     }
 }

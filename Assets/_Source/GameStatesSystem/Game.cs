@@ -6,12 +6,12 @@ namespace GameStatesSystem
 {
     public class Game : IStateMachine<GameScreen>
     {
-        private Dictionary<GameScreen,IState<GameScreen>> _states;
+        private Dictionary<GameScreen,GameState> _states;
         private CinemachineMoving _cineMachineMoving;
         
         public GameScreen CurrentState { get; private set; }
         
-        public Game(Dictionary<GameScreen, IState<GameScreen>> states)
+        public Game(Dictionary<GameScreen, GameState> states)
         {
             _states = states;
         }
@@ -23,6 +23,14 @@ namespace GameStatesSystem
             CurrentState = state;
             _states[CurrentState].SetOwner(this);
             _states[CurrentState].Enter();
+        }
+
+        public void Reset()
+        {
+            foreach (var state in _states.Values)
+            {
+                state.Reset();
+            }
         }
     }
 }
