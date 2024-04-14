@@ -7,6 +7,8 @@ namespace InputSystem
     public class InputListener: MonoBehaviour
     {
         private GlobalIInputActions _inputAction;
+        [SerializeField] private TaskCall _taskCall;
+        private bool _taskOpen = true;
         
         public void Construct()
         {
@@ -16,7 +18,7 @@ namespace InputSystem
 
         private void Update()
         {
-            
+            CallTask();
         }
 
         private void EnableReadingInput()
@@ -28,7 +30,20 @@ namespace InputSystem
         {
             _inputAction.Disable();
         }
-        
+        private void CallTask()
+        {
+            if (Input.GetKeyDown(KeyCode.Tab) & !_taskOpen)
+            {
+                _taskCall.TaskEnable();
+                _taskOpen = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.Tab) & _taskOpen)
+            {
+                _taskCall.TaskDisable();
+                _taskOpen = false;
+            }
+        }
+
         private void OnDestroy()
         {
             DisableReadingInput();
