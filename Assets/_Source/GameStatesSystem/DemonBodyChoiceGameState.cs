@@ -4,8 +4,13 @@ namespace GameStatesSystem
 {
     public class DemonBodyChoiceGameState : GameState
     {
-        private SwitchBodyParts _switchBodyParts;
-        
+        private readonly SwitchBodyParts _switchBodyParts;
+
+        public DemonBodyChoiceGameState(SwitchBodyParts switchBodyParts)
+        {
+            _switchBodyParts = switchBodyParts;
+        }
+
         public override void Enter()
         {
             

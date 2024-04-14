@@ -14,6 +14,8 @@ namespace Core
         [SerializeField] private GameStatesConstructor _gameStatesConstructor;
         [SerializeField] private CinemachineMoving _cineMachineMoving;
         [SerializeField] private TransitionLauncher _transitionLauncher;
+        [SerializeField] private SwitchBodyParts _switchBodyParts;
+        [SerializeField] private SwitchClothes _switchClothes;
         
         private Game _game;
         
@@ -23,7 +25,7 @@ namespace Core
             
             //--
             
-            _game = new Game(_gameStatesConstructor.Construct());
+            _game = new Game(_gameStatesConstructor.Construct(_switchClothes,_switchBodyParts));
             _game.ChangeState(GameScreen.DemonBodyChoice);
             _inputListener.Construct();
             _transitionLauncher.Construct(_game, _cineMachineMoving);

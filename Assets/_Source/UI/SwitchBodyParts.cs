@@ -19,9 +19,9 @@ public class SwitchBodyParts : MonoBehaviour
     [SerializeField] private Image _displayImageBody;
     [SerializeField] private Image _displayImageLegs;
 
-    public Sprite ImageHead;
-    public Sprite ImageBody;
-    public Sprite ImageLegs;
+    public Sprite ImageHead => _headImages[_currentIndexHead];
+    public Sprite ImageBody => _bodyImages[_currentIndexBody];
+    public Sprite ImageLegs => _legsImages[_currentIndexLegs];
 
     private int _currentIndexHead = 0; 
     private int _currentIndexBody = 0; 
@@ -66,12 +66,5 @@ public class SwitchBodyParts : MonoBehaviour
         _currentIndexHead = 0;
         _currentIndexBody = 0;
         _currentIndexLegs = 0;
-    }
-
-    public void SaveDisplayImages()
-    {
-        ImageHead = _headImages[_currentIndexHead];
-        ImageBody = _bodyImages[_currentIndexBody];
-        ImageLegs = _legsImages[_currentIndexLegs];
     }
 }

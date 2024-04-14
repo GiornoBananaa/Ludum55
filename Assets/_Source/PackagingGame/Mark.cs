@@ -18,6 +18,7 @@ namespace PackagingGame
             if (collider != null)
             {
                 _draggable.enabled = false;
+                transform.SetParent(collider.transform);
             }
             else
             {
