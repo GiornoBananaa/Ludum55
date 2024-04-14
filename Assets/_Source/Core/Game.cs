@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CameraSystem;
 using Cinemachine;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace Core
     public class Game : IStateMachine<GameScreen>
     {
         private Dictionary<GameScreen,IState<GameScreen>> _states;
+        private CinemachineMoving _cineMachineMoving;
         
         public GameScreen CurrentState { get; private set; }
         
@@ -29,23 +31,14 @@ namespace Core
             if(_states.ContainsKey(CurrentState))
                 _states[CurrentState].Exit();
             CurrentState = state;
+            _states[CurrentState].SetOwner(this);
             _states[CurrentState].Enter();
         }
     }
     
     public class DemonBodyChoiceGameState : IState<GameScreen>
     {
-        private readonly CinemachineMoving _cineMachineMoving;
-        private readonly CinemachineVirtualCamera _virtualCamera;
-        private readonly Transform _cameraFollowObject;
         private IStateMachine<GameScreen> _owner;
-
-        public DemonBodyChoiceGameState(CinemachineMoving cineMachineMoving,CinemachineVirtualCamera virtualCamera, Transform cameraFollowObject)
-        {
-            _cineMachineMoving = cineMachineMoving;
-            _virtualCamera = virtualCamera;
-            _cameraFollowObject = cameraFollowObject;
-        }
         
         public void SetOwner(IStateMachine<GameScreen> owner)
         {
@@ -54,7 +47,7 @@ namespace Core
 
         public void Enter()
         {
-            _cineMachineMoving.SwitchCamera(_virtualCamera,_cameraFollowObject);
+            
         }
 
         public void Exit()
@@ -65,17 +58,7 @@ namespace Core
     
     public class DemonOutfitChoiceGameState : IState<GameScreen>
     {
-        private readonly CinemachineMoving _cineMachineMoving;
-        private readonly CinemachineVirtualCamera _virtualCamera;
-        private readonly Transform _cameraFollowObject;
         private IStateMachine<GameScreen> _owner;
-
-        public DemonOutfitChoiceGameState(CinemachineMoving cineMachineMoving,CinemachineVirtualCamera virtualCamera, Transform cameraFollowObject)
-        {
-            _cineMachineMoving = cineMachineMoving;
-            _virtualCamera = virtualCamera;
-            _cameraFollowObject = cameraFollowObject;
-        }
         
         public void SetOwner(IStateMachine<GameScreen> owner)
         {
@@ -84,7 +67,7 @@ namespace Core
 
         public void Enter()
         {
-            _cineMachineMoving.SwitchCamera(_virtualCamera,_cameraFollowObject);
+            
         }
 
         public void Exit()
@@ -95,17 +78,7 @@ namespace Core
     
     public class PackagingGameState : IState<GameScreen>
     {
-        private readonly CinemachineMoving _cineMachineMoving;
-        private readonly CinemachineVirtualCamera _virtualCamera;
-        private readonly Transform _cameraFollowObject;
         private IStateMachine<GameScreen> _owner;
-
-        public PackagingGameState(CinemachineMoving cineMachineMoving,CinemachineVirtualCamera virtualCamera, Transform cameraFollowObject)
-        {
-            _cineMachineMoving = cineMachineMoving;
-            _virtualCamera = virtualCamera;
-            _cameraFollowObject = cameraFollowObject;
-        }
         
         public void SetOwner(IStateMachine<GameScreen> owner)
         {
@@ -114,7 +87,7 @@ namespace Core
 
         public void Enter()
         {
-            _cineMachineMoving.SwitchCamera(_virtualCamera,_cameraFollowObject);
+            
         }
 
         public void Exit()
@@ -125,17 +98,7 @@ namespace Core
     
     public class DemonSummoningGameState : IState<GameScreen>
     {
-        private readonly CinemachineMoving _cineMachineMoving;
-        private readonly CinemachineVirtualCamera _virtualCamera;
-        private readonly Transform _cameraFollowObject;
         private IStateMachine<GameScreen> _owner;
-
-        public DemonSummoningGameState(CinemachineMoving cineMachineMoving,CinemachineVirtualCamera virtualCamera, Transform cameraFollowObject)
-        {
-            _cineMachineMoving = cineMachineMoving;
-            _virtualCamera = virtualCamera;
-            _cameraFollowObject = cameraFollowObject;
-        }
         
         public void SetOwner(IStateMachine<GameScreen> owner)
         {
@@ -144,7 +107,7 @@ namespace Core
 
         public void Enter()
         {
-            _cineMachineMoving.SwitchCamera(_virtualCamera,_cameraFollowObject);
+            
         }
 
         public void Exit()

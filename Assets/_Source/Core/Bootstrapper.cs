@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CameraSystem;
 using InputSystem;
 using UnityEngine;
 
@@ -21,10 +22,10 @@ namespace Core
             
             //--
             
-            _game = new Game(_gameStatesConstructor.Construct(_cineMachineMoving));
+            _game = new Game(_gameStatesConstructor.Construct());
             _game.ChangeState(GameScreen.DemonBodyChoice);
             _inputListener.Construct();
-            _transitionLauncher.Construct(_game);
+            _transitionLauncher.Construct(_game, _cineMachineMoving);
         }
     }
 }
