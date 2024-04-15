@@ -14,79 +14,172 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Head:
   - Sprite: {fileID: 21300000, guid: 7d30b71a9ccf4b84db12650dc8c207cf, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Skeletal Head
+    - Sharp - cheeked
   - Sprite: {fileID: 21300000, guid: 5fb1cf0bfd6707049b08acebfbd17877, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Sea creature
+    - Cthulhu
   - Sprite: {fileID: 21300000, guid: 11cf7bffe97873748abf17e93c7fd55e, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Red Horns
+    - Red ears
   - Sprite: {fileID: 21300000, guid: 851d7673127cadd468266ec761c2c5fb, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Scar on eye
+    - White hair
   - Sprite: {fileID: 21300000, guid: 4ec0b817a75d69245866a335a1b022dc, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Golden horns
+    - Precious metal
   - Sprite: {fileID: 21300000, guid: 8399df9bf2dd73144bb7d3e58130f7b7, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Aries
+    - Pink eyes
   - Sprite: {fileID: 21300000, guid: 89534f59746eb774f85015003c6fccff, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Hammer
+    - Visor
+  - Sprite: {fileID: 21300000, guid: d1d18423c286f574599d4f62d571d0f0, type: 3}
+    Descriptions:
+    - Tongue
+    - Tusks
+  - Sprite: {fileID: 21300000, guid: e536ec8608903a94381940cbbc9dbb72, type: 3}
+    Descriptions:
+    - Rusty teeth
+    - Green earrings
   - Sprite: {fileID: 21300000, guid: eea2226b4adc7e74ea6350f1a7fa40b7, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Three eyes
+    - Wolf
   Body:
   - Sprite: {fileID: 21300000, guid: a9cfc6e32e628204bafb2f9d90aae1e5, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Black Spine
+    - Bone-Torso
   - Sprite: {fileID: 21300000, guid: edf7c3d811a28b441b8438681ade5420, type: 3}
-    Descriptions: []
+    Descriptions:
+    - 'Sea Shell '
+    - Crab
   - Sprite: {fileID: 21300000, guid: e3f5bd5d46c16ee42bc091d0b6e469f7, type: 3}
-    Descriptions: []
+    Descriptions:
+    - White Chest
+    - Dragon Armbands
   - Sprite: {fileID: 21300000, guid: 02e06105f828ab1449ca4718ca11c555, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Furry hands
+    - Green nails
   - Sprite: {fileID: 21300000, guid: da136ac171a6b8a439c275bfc7db6bf6, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Excavation
+    - Polished Gold
   - Sprite: {fileID: 21300000, guid: 450b71e9ceaaeca4ebfb7efef55151c9, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Pink Scales
+    - Pink Chitin
   - Sprite: {fileID: 21300000, guid: b7a1bb09ed039bf4dbccb5cef243c72a, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Holes
+    - Blue Plates
+  - Sprite: {fileID: 21300000, guid: 688c5bc49bfd5204d84a6f6a995bfd5d, type: 3}
+    Descriptions:
+    - Green tongue
+    - Fist eyes
+  - Sprite: {fileID: 21300000, guid: d6c88a5baa36a634d8c4bcee07eed5ad, type: 3}
+    Descriptions:
+    - Cyan bib
+    - Camouflage
   - Sprite: {fileID: 21300000, guid: 9ec13c1a90232e840bc5fa1778de17f2, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Eye in chest
+    - Purple eyes
   Legs:
   - Sprite: {fileID: 21300000, guid: 732cbf62541eb9347b16d89032535c86, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Grey nails
+    - Bone-Legs
   - Sprite: {fileID: 21300000, guid: 18cdb3a45750aff42a6bda0faa7ddcbe, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Speckled knees
+    - Green Hoofs
   - Sprite: {fileID: 21300000, guid: 3152f2f43c6d9a94ab4b3fe3ab8eaecc, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Thin- legged
+    - Sharp feet
   - Sprite: {fileID: 21300000, guid: f81f51477532e684c81be6da328cf57c, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Green toenails
+    - Purple legs
   - Sprite: {fileID: 21300000, guid: 4f0186b6765de394eba1e65392bdce3b, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Yellow
+    - Brass legs
   - Sprite: {fileID: 21300000, guid: 5890459bbfd0ffb45921c2a0afa072b5, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Frog
+    - Striped Shrimp
   - Sprite: {fileID: 21300000, guid: 7adc03f58f5d699468a29091b6b4793d, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Copper spikes
+    - Boots
   - Sprite: {fileID: 21300000, guid: 582086757df2d3e408d430fcf5a16665, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Brown fur
+    - Purple Toes
+  - Sprite: {fileID: 21300000, guid: 9c6af99a6bb37cc408cbdecc3dd0cd9e, type: 3}
+    Descriptions:
+    - Leaves
+    - Ragged stripes
+  - Sprite: {fileID: 21300000, guid: f83347336bb852947a7267a33fc45226, type: 3}
+    Descriptions:
+    - Striped ankle
+    - Rusty curves
   HeadClothes:
   - Sprite: {fileID: 21300000, guid: 87fe8edbdfc2b074184056bf301897bd, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Nothing
   - Sprite: {fileID: 21300000, guid: f410e90e419d38e43bf0837204ea5951, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Clown
+    - Circus
   - Sprite: {fileID: 21300000, guid: 024a9ca48ac4ba44383fe50532d9ea75, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Cool Emoji
+    - Sun-resistent
   - Sprite: {fileID: 21300000, guid: 58d286d2923e99f49bc4490ea30857cf, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Nimbus
+    - Gold
   BodyClothes:
   - Sprite: {fileID: 21300000, guid: aec1d538e0ea6d94cb46b70f06bd19d0, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Nothing
   - Sprite: {fileID: 21300000, guid: 354a3967e504364418a04767251454bf, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Chain
+    - Silver
   - Sprite: {fileID: 21300000, guid: 6e8a7b050c075df44b3db692176f7662, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Spikes
+    - Armor
   - Sprite: {fileID: 21300000, guid: 0f8d0f40a2af3bc46ac9978e18fe543b, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Flying
+    - Torn
   LegsClothes:
   - Sprite: {fileID: 21300000, guid: 8e309caeb6253104ab81072ae1fa37b3, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Nothing
   - Sprite: {fileID: 21300000, guid: cde41c23813dd71438d9ccd5e3e6f5da, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Animal skull
+    - Red cloth
   - Sprite: {fileID: 21300000, guid: 55412632d5c983f4abac7f92f0e33bdd, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Bells
+    - Rings
   - Sprite: {fileID: 21300000, guid: 54897bac454eb5444bef6d7723502191, type: 3}
-    Descriptions: []
+    Descriptions:
+    - Arrow shaped
+    - Devil itself

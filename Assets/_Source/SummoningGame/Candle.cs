@@ -43,7 +43,6 @@ namespace SummoningGame
             if (_isLighted || !_isSetuped) return false;
             _spriteRenderer.sprite = _lightenedSprite;
             _isLighted = true;
-            Debug.Log(_spriteRenderer.sprite);
             OnCandleLighted?.Invoke();
             return true;
         }

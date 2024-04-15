@@ -12,4 +12,142 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f178e859eb47c99c9f501731f91b43, type: 3}
   m_Name: AudioDataSO
   m_EditorClassIdentifier: 
-  <Sounds>k__BackingField: []
+  <Sounds>k__BackingField:
+  - IsMusic: 0
+    SoundType: 1
+    Volume: 1
+    Pitch: 1
+    PitchVariation: 0
+    Loop: 0
+    PlayOnAwake: 0
+    Clips:
+    - {fileID: 8300000, guid: 7c87934031b276147998c89a63d45be8, type: 3}
+  - IsMusic: 0
+    SoundType: 2
+    Volume: 1
+    Pitch: 1
+    PitchVariation: 0
+    Loop: 0
+    PlayOnAwake: 0
+    Clips:
+    - {fileID: 8300000, guid: 6b26fb10d8e671747be5d69de011603c, type: 3}
+    - {fileID: 8300000, guid: be190789dd206084cb2188db9a5a2e84, type: 3}
+  - IsMusic: 0
+    SoundType: 3
+    Volume: 1
+    Pitch: 1
+    PitchVariation: 0
+    Loop: 0
+    PlayOnAwake: 0
+    Clips:
+    - {fileID: 8300000, guid: 50ba656c0e7a9404c862703edf0c383c, type: 3}
+  - IsMusic: 0
+    SoundType: 4
+    Volume: 1
+    Pitch: 1
+    PitchVariation: 0
+    Loop: 0
+    PlayOnAwake: 0
+    Clips:
+    - {fileID: 8300000, guid: ea90c29fb44b4cb45a7551a165c8c6d5, type: 3}
+  - IsMusic: 0
+    SoundType: 5
+    Volume: 1
+    Pitch: 1
+    PitchVariation: 0
+    Loop: 0
+    PlayOnAwake: 0
+    Clips:
+    - {fileID: 8300000, guid: 204f3c713f844a141b95e4b5fe861c30, type: 3}
+  - IsMusic: 0
+    SoundType: 6
+    Volume: 1
+    Pitch: 1
+    PitchVariation: 0
+    Loop: 0
+    PlayOnAwake: 0
+    Clips:
+    - {fileID: 8300000, guid: 55e6d246232b3be409aa4e578ffba211, type: 3}
+    - {fileID: 8300000, guid: 282f23a4e31db884db41c5eb87c98d8f, type: 3}
+    - {fileID: 8300000, guid: 0eacf43e4afca4240b7b2a30226f9b6a, type: 3}
+  - IsMusic: 0
+    SoundType: 7
+    Volume: 1
+    Pitch: 1
+    PitchVariation: 0
+    Loop: 1
+    PlayOnAwake: 0
+    Clips:
+    - {fileID: 8300000, guid: 2e5885ccbd13e214b9264569bfab32ce, type: 3}
+  - IsMusic: 0
+    SoundType: 8
+    Volume: 1
+    Pitch: 1
+    PitchVariation: 0
+    Loop: 0
+    PlayOnAwake: 0
+    Clips:
+    - {fileID: 8300000, guid: 35997390fc1c89b4a844c8877844158d, type: 3}
+  - IsMusic: 0
+    SoundType: 9
+    Volume: 1
+    Pitch: 1
+    PitchVariation: 0
+    Loop: 1
+    PlayOnAwake: 0
+    Clips:
+    - {fileID: 8300000, guid: 6222f856408e9d64cafb66d5c353d356, type: 3}
+  - IsMusic: 0
+    SoundType: 10
+    Volume: 1
+    Pitch: 1
+    PitchVariation: 0
+    Loop: 0
+    PlayOnAwake: 0
+    Clips:
+    - {fileID: 8300000, guid: 0950e027b45ff3b4ba8793633fd5c60e, type: 3}
+  - IsMusic: 0
+    SoundType: 11
+    Volume: 1
+    Pitch: 1
+    PitchVariation: 0
+    Loop: 0
+    PlayOnAwake: 0
+    Clips:
+    - {fileID: 8300000, guid: ecb057b483b60344e852964b37091560, type: 3}
+  - IsMusic: 0
+    SoundType: 12
+    Volume: 0.5
+    Pitch: 1
+    PitchVariation: 0
+    Loop: 1
+    PlayOnAwake: 0
+    Clips:
+    - {fileID: 8300000, guid: 3464a8cf3a464434fa9a0d81c805ea65, type: 3}
+  - IsMusic: 0
+    SoundType: 13
+    Volume: 1
+    Pitch: 1
+    PitchVariation: 0
+    Loop: 0
+    PlayOnAwake: 0
+    Clips:
+    - {fileID: 8300000, guid: 6139aec4242012c439cac35997902af1, type: 3}
+  - IsMusic: 0
+    SoundType: 14
+    Volume: 1
+    Pitch: 1
+    PitchVariation: 0
+    Loop: 0
+    PlayOnAwake: 0
+    Clips:
+    - {fileID: 8300000, guid: 23fcf6bd92661f041baab8f2f9fb89af, type: 3}
+  - IsMusic: 0
+    SoundType: 15
+    Volume: 1
+    Pitch: 1
+    PitchVariation: 0
+    Loop: 0
+    PlayOnAwake: 0
+    Clips:
+    - {fileID: 8300000, guid: 0950e027b45ff3b4ba8793633fd5c60e, type: 3}

@@ -22,9 +22,11 @@ namespace AudioSystem
             
             _soundSources = new Dictionary<Sounds, AudioSource>();
             _spatialSources = new Dictionary<Sounds, AudioSource>();
-            
-            SoundVolume = PlayerPrefs.GetFloat("SoundVolume",0.5f);
-            MusicVolume = PlayerPrefs.GetFloat("MusicVolume",0.5f);
+
+            PlayerPrefs.SetFloat("SoundVolume", 1f);
+            PlayerPrefs.SetFloat("MusicVolume", 1f);
+            SoundVolume = PlayerPrefs.GetFloat("SoundVolume",1f);
+            MusicVolume = PlayerPrefs.GetFloat("MusicVolume",1f);
             
             foreach (Sound sound in _sounds.Values)
             {
@@ -107,10 +109,9 @@ namespace AudioSystem
                 {
                     if(sound.Clip == _musicSource.clip)
                         return;
-                    source.clip = sound.Clip;
                     sound.SetSourceVariables(_musicSource,MusicVolume);
                 }
-                
+                source.clip = sound.Clip;
                 source.Play();
             }
             else

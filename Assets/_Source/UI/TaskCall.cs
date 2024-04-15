@@ -21,14 +21,14 @@ namespace UI
         public void TaskEnable()
         {
             IsOpened = true;
-            _audioPlayer.Play(Sounds.TaskPad);
+            _audioPlayer.Play(Sounds.TaskPadOpen);
             _animator.SetInteger(_state, 2);
         }
 
         public void TaskDisable()
         {
             IsOpened = false;
-            _audioPlayer.Play(Sounds.TaskPad);
+            _audioPlayer.Play(Sounds.TaskPadClose);
             _animator.SetInteger(_state, 1);
         }
     }

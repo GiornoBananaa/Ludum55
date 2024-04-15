@@ -29,12 +29,12 @@ namespace GameStatesSystem
         public void SetResults(int head,int body,int legs,int headClothes,int bodyClothes,int legsClothes)
         {
             _taskResultText.text = 
-                $"Голова - {head} XP\n" +
-                $"Тело - {body} XP\n" +
-                $"Ноги - {legs} XP\n" +
-                $"Головной убор - {headClothes} XP\n" +
-                $"Верхняя одежда - {bodyClothes} XP\n" +
-                $"Низ - {legsClothes} XP\n";
+                $"Head - {head} XP\n" +
+                $"Body - {body} XP\n" +
+                $"Legs - {legs} XP\n" +
+                $"Headdress - {headClothes} XP\n" +
+                $"Top - {bodyClothes} XP\n" +
+                $"Bottom - {legsClothes} XP\n";
             _overallPointsText.text = (head + body+ legs + headClothes+ bodyClothes + legsClothes)+"XP";
         }
 

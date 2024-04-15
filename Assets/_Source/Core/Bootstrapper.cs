@@ -28,6 +28,7 @@ namespace Core
         [SerializeField] private EndResultView _endResultView;
         [SerializeField] private Lighter _lighter;
         [SerializeField] private DraggableItem[] _draggableItemsInBox;
+        [SerializeField] private DraggableItem[] _draggableItems;
         [SerializeField] private AudioPlayer _audioPlayer;
         [SerializeField] private Mark[] _marks;
         [SerializeField] private Marker[] _markers;
@@ -71,9 +72,10 @@ namespace Core
             {
                 marker.Construct(_audioPlayer);
             }
-            foreach (var mark in _marks)
+
+            foreach (var item in _draggableItems)
             {
-                //mark.Construct(_audioPlayer);
+                item.Construct(_audioPlayer);
             }
             _lighter.Construct(_audioPlayer, _game);
             _tape.Construct(_audioPlayer);

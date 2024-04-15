@@ -1,4 +1,5 @@
 using System;
+using AudioSystem;
 using DG.Tweening;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace PackagingGame
         private Vector2 _normalScale;
         private Vector2 _offset;
         private Vector2 _defaultPosition;
+        private AudioPlayer _audioPlayer;
         private bool _isAnimation;
 
         public Action OnDragStart;
@@ -19,6 +21,11 @@ namespace PackagingGame
         
         public bool IsDragged { get; private set; }
 
+        public void Construct(AudioPlayer audioPlayer)
+        {
+            _audioPlayer = audioPlayer;
+        }
+        
         private void Start()
         {
             _defaultPosition = transform.localPosition;
@@ -29,6 +36,8 @@ namespace PackagingGame
         public void OnMouseDown()
         {
             if (!enabled || _isAnimation) return;
+            if(_audioPlayer!= null)
+                _audioPlayer.Play(Sounds.ItemTake);
             IsDragged = true;
             transform.localScale = _normalScale * _scaleFactor;
             transform.SetAsLastSibling();
@@ -39,6 +48,8 @@ namespace PackagingGame
         public void OnMouseUp()
         {
             if (!enabled || _isAnimation) return;
+            if(_audioPlayer!= null)
+                _audioPlayer.Play(Sounds.ItemTake);
             IsDragged = false;
             transform.localScale = _normalScale;
             OnDragEnd?.Invoke();
@@ -56,6 +67,12 @@ namespace PackagingGame
         
         public void ReturnToDefaultPosition()
         {
+            if(IsDragged)
+            {
+                OnDragEnd?.Invoke();
+                IsDragged = false;
+                transform.localScale = _normalScale;
+            }
             _isAnimation = true;
             transform.DOLocalMove(_defaultPosition, 0.2f).OnComplete(()=>_isAnimation=false);
         }

@@ -41,14 +41,12 @@ namespace SummoningGame
                 {
                     _draggable.enabled = true;
                     _spriteRenderer.sprite = _lightenedSprite;
-                    _audioPlayer.Stop(Sounds.BurningLighter);
                 }
                 else if(_isBurning &&  !value)
                 {
                     _draggable.enabled = false;
                     _draggable.ReturnToDefaultPosition();
                     _spriteRenderer.sprite = _closedSprite;
-                    _audioPlayer.Play(Sounds.BurningLighter);
                 }
                 _isBurning = value;
             }
@@ -77,8 +75,8 @@ namespace SummoningGame
             {
                 candle.OnCandleSetup += SetupCandle;
             }
-            _draggable.OnDragStart += PlayLighterSound;
-            _draggable.OnDragEnd += PlayLighterSound;
+            _draggable.OnDragStart += PlayFireSound;
+            _draggable.OnDragEnd += StopFireSound;
         }
 
         private void SetupCandle()
@@ -93,6 +91,7 @@ namespace SummoningGame
         
         private void ShuffleCandlesOrder()
         {
+            _candelsInOrder.Clear();
             List<Candle> buf = new List<Candle>(_candles);
             for (int i = 0; i < _candles.Length; i++)
             {
@@ -124,6 +123,7 @@ namespace SummoningGame
                         }
                         else
                         {
+                            _audioPlayer.Play(Sounds.LighterInteraction);
                             _lightedCandles.Add(candle);
                             if (_lightedCandles.Count == _candles.Length)
                             {
@@ -164,9 +164,14 @@ namespace SummoningGame
             ShuffleCandlesOrder();
         }
         
-        private void PlayLighterSound()
+        private void PlayFireSound()
         {
-            _audioPlayer.Play(Sounds.LighterInteraction);
+            _audioPlayer.Play(Sounds.BurningLighter);
+        }
+        
+        private void StopFireSound()
+        {
+            _audioPlayer.Stop(Sounds.BurningLighter);
         }
         
         private void CheckBox()
@@ -216,6 +221,8 @@ namespace SummoningGame
         private void OnDestroy()
         {
             _draggable.OnDrag -= CheckSurface;
+            _draggable.OnDragStart -= PlayFireSound;
+            _draggable.OnDragEnd -= StopFireSound;
             foreach (var candle in _candles)
             {
                 candle.OnCandleSetup -= SetupCandle;

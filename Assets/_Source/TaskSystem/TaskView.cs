@@ -11,12 +11,14 @@ namespace TaskSystem
         {
              if(head.Descriptions.Length == 0) return;
             _taskText.text =
-                $"Голова - {head.Descriptions[Random.Range(0, head.Descriptions.Length)]}\n" +
-                $"Тело - {body.Descriptions[Random.Range(0, body.Descriptions.Length)]}\n" +
-                $"Ноги - {legs.Descriptions[Random.Range(0, legs.Descriptions.Length)]}\n" +
-                $"Головной убор - {bodyClothes.Descriptions[Random.Range(0, bodyClothes.Descriptions.Length)]}\n" +
-                $"Верхняя одежда - {legsClothes.Descriptions[Random.Range(0, legsClothes.Descriptions.Length)]}\n" +
-                $"Низ - {headClothes.Descriptions[Random.Range(0, headClothes.Descriptions.Length)]}\n";
+                "<u><b>Body parts</b></u>\n" +
+                $"Head - {head.Descriptions[Random.Range(0, head.Descriptions.Length)]}\n" +
+                $"Body - {body.Descriptions[Random.Range(0, body.Descriptions.Length)]}\n" +
+                $"Legs - {legs.Descriptions[Random.Range(0, legs.Descriptions.Length)]}\n" +
+                $"<u><b>Clothes</b></u>\n" +
+                $"Headdress - {headClothes.Descriptions[Random.Range(0, headClothes.Descriptions.Length)]}\n" +
+                $"Top - {bodyClothes.Descriptions[Random.Range(0, bodyClothes.Descriptions.Length)]}\n" +
+                $"Bottom - {legsClothes.Descriptions[Random.Range(0, legsClothes.Descriptions.Length)]}\n";
         }
     }
 }

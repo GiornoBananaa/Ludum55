@@ -64,6 +64,7 @@ namespace PackagingGame
 
                         if (percent >= 1)
                         {
+                            _audioPlayer.Play(Sounds.TapePuttingEnd);
                             OnTapePutted?.Invoke();
                         }
                     }
