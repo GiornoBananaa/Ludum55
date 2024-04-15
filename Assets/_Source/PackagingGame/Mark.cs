@@ -28,7 +28,7 @@ namespace PackagingGame
         
         private void OnDestroy()
         {
-            _draggable.OnDragEnd += CheckSurface;
+            _draggable.OnDragEnd -= CheckSurface;
         }
     }
 }

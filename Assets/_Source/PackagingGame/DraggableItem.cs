@@ -14,6 +14,7 @@ namespace PackagingGame
 
         public Action OnDragStart;
         public Action OnDragEnd;
+        public Action OnDrag;
         
         public bool IsDragged { get; private set; }
 
@@ -36,6 +37,7 @@ namespace PackagingGame
         
         public void OnMouseUp()
         {
+            if (!enabled) return;
             IsDragged = false;
             transform.localScale = _normalScale;
             OnDragEnd?.Invoke();
@@ -48,6 +50,7 @@ namespace PackagingGame
             if (!enabled) return;
             Vector2 mouseWorldPos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
             transform.position = mouseWorldPos + _offset;
+            OnDrag?.Invoke();
         }
         
         public void ReturnToDefaultPosition()
