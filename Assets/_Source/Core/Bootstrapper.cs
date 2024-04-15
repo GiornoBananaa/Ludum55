@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using CameraSystem;
 using GameStatesSystem;
 using InputSystem;
@@ -16,6 +15,8 @@ namespace Core
         [SerializeField] private TransitionLauncher _transitionLauncher;
         [SerializeField] private SwitchBodyParts _switchBodyParts;
         [SerializeField] private SwitchClothes _switchClothes;
+        [SerializeField] private Transform _boxInPackaging;
+        [SerializeField] private Transform _boxInSummoning;
         
         private Game _game;
         
@@ -25,7 +26,7 @@ namespace Core
             
             //--
             
-            _game = new Game(_gameStatesConstructor.Construct(_switchClothes,_switchBodyParts));
+            _game = new Game(_gameStatesConstructor.Construct(_switchClothes,_switchBodyParts,_boxInPackaging,_boxInSummoning));
             _game.ChangeState(GameScreen.DemonBodyChoice);
             _inputListener.Construct();
             _transitionLauncher.Construct(_game, _cineMachineMoving);

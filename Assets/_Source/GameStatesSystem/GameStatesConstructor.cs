@@ -8,14 +8,14 @@ namespace GameStatesSystem
     {
         private Dictionary<GameScreen, GameState> _gameStates;
 
-        public Dictionary<GameScreen, GameState> Construct(SwitchClothes switchClothes, SwitchBodyParts switchBodyParts)
+        public Dictionary<GameScreen, GameState> Construct(SwitchClothes switchClothes, SwitchBodyParts switchBodyParts, Transform boxInPackaging,Transform boxInSummoning)
         {
             _gameStates = new Dictionary<GameScreen, GameState>()
             {
                 {GameScreen.DemonBodyChoice, new DemonBodyChoiceGameState(switchBodyParts)},
                 {GameScreen.DemonOutfitChoice, new DemonOutfitChoiceGameState(switchClothes,switchBodyParts)},
                 {GameScreen.Packaging, new PackagingGameState()},
-                {GameScreen.DemonSummoning, new DemonSummoningGameState()},
+                {GameScreen.DemonSummoning, new DemonSummoningGameState(boxInPackaging,boxInSummoning)},
             };
             
             return _gameStates;

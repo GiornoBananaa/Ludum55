@@ -91,6 +91,10 @@ namespace SummoningGame
                             _lightedCandles.Add(candle);
                             if (_lightedCandles.Count == _candles.Length)
                             {
+                                foreach (var c in _candles)
+                                {
+                                    c.ActivateCandle();
+                                }
                                 _box.enabled = true;
                                 _draggable.enabled = false;
                                 _draggable.ReturnToDefaultPosition();
