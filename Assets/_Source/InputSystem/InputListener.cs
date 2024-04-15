@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using ArmySystem;
+using UI;
 using UnityEngine;
 
 namespace InputSystem
@@ -8,7 +9,6 @@ namespace InputSystem
     {
         private GlobalIInputActions _inputAction;
         [SerializeField] private TaskCall _taskCall;
-        private bool _taskOpen = true;
         
         public void Construct()
         {
@@ -32,15 +32,12 @@ namespace InputSystem
         }
         private void CallTask()
         {
-            if (Input.GetKeyDown(KeyCode.Tab) & !_taskOpen)
+            if (Input.GetKeyDown(KeyCode.Tab))
             {
-                _taskCall.TaskEnable();
-                _taskOpen = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.Tab) & _taskOpen)
-            {
-                _taskCall.TaskDisable();
-                _taskOpen = false;
+                if(!_taskCall.IsOpened)
+                    _taskCall.TaskEnable();
+                else
+                    _taskCall.TaskDisable();
             }
         }
 

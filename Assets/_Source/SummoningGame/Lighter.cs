@@ -59,14 +59,19 @@ namespace SummoningGame
             _audioPlayer = audioPlayer;
             _game = game;
         }
+
+        public void SetBox(GameObject box)
+        {
+            _box = box.GetComponent<DraggableItem>();
+            _box.OnDragEnd += CheckBox;
+            _box.enabled = false;
+        }
         
         private void Start()
         {
             _pentagramSpriteRenderer.sprite = _defaultPentagram;
             _draggable.enabled = false;
             _draggable.OnDrag += CheckSurface;
-            _box.OnDragEnd += CheckBox;
-            _box.enabled = false;
             ShuffleCandlesOrder();
             foreach (var candle in _candles)
             {

@@ -26,7 +26,7 @@ namespace CameraSystem
         private LinkedListNode<CameraData> _currentCameraNode;
         private Coroutine _currentCoroutine;
         private CameraData _cameraIndex;
-        private Transform _start;
+        private LinkedListNode<CameraData> _start;
         
         public bool IsMoving { get; private set; }
         
@@ -35,7 +35,7 @@ namespace CameraSystem
             _camerasInCircle = new LinkedList<CameraData>(_cameraDatas);
             _currentCameraNode = _camerasInCircle.First;
             IsMoving = false;
-            _start = _currentCameraNode.Value.CameraFollowObject;
+            _start = _currentCameraNode;
         }
 
         public void MoveLeft()
@@ -80,19 +80,17 @@ namespace CameraSystem
 
         public void MoveStart()
         {
-            var currPos = _currentCamera.transform.position;
-            Vector2 newPos = new Vector2(currPos.x+_camerasMinDistance,currPos.y);
-            
-            foreach (var cameraData in _camerasInCircle)
+            while (_currentCameraNode.Value != _start.Value)
             {
-                if (cameraData.CameraFollowObject == _start)
-                {
-                    _currentCameraNode = _camerasInCircle.Find(cameraData);
-                    break;
-                }
+                _currentCameraNode = _camerasInCircle.First;
+                _camerasInCircle.RemoveFirst();
+                _camerasInCircle.AddLast(_currentCameraNode);
             }
             
-            _camerasInCircle.First.Value.CameraFollowObject.position = newPos;
+            var currPos = _currentCameraNode.Previous.Value.CameraFollowObject.position;
+            Vector2 newPos = new Vector2(currPos.x+_camerasMinDistance,currPos.y);
+            
+            _currentCameraNode.Value.CameraFollowObject.position = newPos;
             
             MoveCamera(_currentCameraNode.Value.CameraFollowObject.transform.position);
         }

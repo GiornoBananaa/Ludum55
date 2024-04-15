@@ -1,4 +1,5 @@
-﻿using SummoningGame;
+﻿using PackagingGame;
+using SummoningGame;
 using UnityEngine;
 
 namespace GameStatesSystem
@@ -7,6 +8,7 @@ namespace GameStatesSystem
     {
         private Transform _boxInPackaging;
         private Transform _boxInSummoning;
+        private GameObject _boxCopy;
         private Lighter _lighter;
 
         public DemonSummoningGameState(Transform boxInPackaging,Transform boxInSummoning, Lighter lighter)
@@ -18,16 +20,20 @@ namespace GameStatesSystem
         
         public override void Enter()
         {
-            foreach (Transform child in _boxInSummoning)
+            if(_boxCopy != null)
+                Object.Destroy(_boxCopy);
+            _boxCopy = Object.Instantiate(_boxInPackaging.gameObject, _boxInSummoning.position,_boxInSummoning.rotation,_boxInSummoning.parent);
+            _boxCopy.transform.localScale = _boxInSummoning.localScale;
+            _lighter.SetBox(_boxCopy);
+            /*foreach (Transform child in _boxInSummoning)
             {
                 Object.Destroy(child.gameObject);
-            }
-            foreach (Transform child in _boxInPackaging)
+            }*/
+            foreach (Transform child in _boxCopy.transform)
             {
-                GameObject copy = Object.Instantiate(child.gameObject, _boxInSummoning, false);
-                if (copy.TryGetComponent(out LineRenderer line))
+                if (child.TryGetComponent(out LineRenderer line))
                 {
-                    line.widthMultiplier = line.widthMultiplier * copy.transform.lossyScale.x/child.lossyScale.x;
+                    line.widthMultiplier = line.widthMultiplier * child.transform.lossyScale.x/child.lossyScale.x;
                 }
             }
         }

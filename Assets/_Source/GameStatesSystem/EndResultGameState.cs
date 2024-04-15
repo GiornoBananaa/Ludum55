@@ -1,5 +1,6 @@
 ﻿using PackagingGame;
 using TaskSystem;
+using UnityEngine;
 
 namespace GameStatesSystem
 {
@@ -47,7 +48,7 @@ namespace GameStatesSystem
             _tape.Reset();
             foreach (var mark in _marks)
             {
-                mark.transform.SetParent(mark.transform.parent.parent);
+                mark.ReturnToDefaultParent();
             }
         }
     }

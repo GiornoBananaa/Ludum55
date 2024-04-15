@@ -6,10 +6,18 @@ namespace PackagingGame
     {
         [SerializeField] private DraggableItem _draggable;
         [SerializeField] private LayerMask _boxLayerMask;
+
+        private Transform _defaultParent;
         
         private void Start()
         {
             _draggable.OnDragEnd += CheckSurface;
+            _defaultParent = transform.parent;
+        }
+
+        public void ReturnToDefaultParent()
+        {
+            transform.parent = _defaultParent;
         }
         
         private void CheckSurface()

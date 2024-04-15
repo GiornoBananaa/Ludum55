@@ -85,8 +85,8 @@ namespace PackagingGame
         
         public void Reset()
         {
-            _lastTapeY = 0;
             _mask.localPosition = _maskDefault;
+            _lastTapeY = _mask.position.y;
             _tape.enabled = true;
             _tape.ReturnToDefaultPosition();
         }

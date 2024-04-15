@@ -32,11 +32,12 @@ public class TransitionLauncher : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        float horizontalAxis = Input.GetAxisRaw("Horizontal");
+        if (horizontalAxis<0)
         {
             MoveLeft();
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (horizontalAxis>0)
         {
             MoveRight();
         }
@@ -74,7 +75,6 @@ public class TransitionLauncher : MonoBehaviour
 
     public void MoveStart()
     {
-        _current++;
         for (int i = 0; i < _gameScreens.Length-1; i++)
         {
             if (_gameScreens[i] == GameScreen.DemonBodyChoice)
