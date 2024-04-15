@@ -22,6 +22,9 @@ public class SwitchClothes : MonoBehaviour
     [SerializeField] private Image _displayImageHead;
     [SerializeField] private Image _displayImageBody;
     [SerializeField] private Image _displayImageLegs;
+    
+    [SerializeField] private GameObject _clothes;
+    [SerializeField] private GameObject _clothesUnderDemon;
 
     public Sprite ImageHeadClothes => _headClothesImages[_currentIndexHead];
     public Sprite ImageBodyClothes => _bodyClothesImages[_currentIndexBody];
@@ -47,6 +50,16 @@ public class SwitchClothes : MonoBehaviour
     {
         currentIndex = (currentIndex + direction + images.Count) % images.Count;
         displayImage.sprite = currentIndex >= 0 ? images[currentIndex] : null;
+
+        if (images == _bodyClothesImages & _currentIndexBody == 3)
+            _displayImageBodyClothes.transform.SetParent(_clothesUnderDemon.transform);
+        else if (images == _bodyClothesImages)
+            _displayImageBodyClothes.transform.SetParent(_clothes.transform);
+
+        if (images == _legsClothesImages & _currentIndexLegs == 3)
+            _displayImageLegsClothes.transform.SetParent(_clothesUnderDemon.transform);
+        else if (images == _legsClothesImages)
+            _displayImageLegsClothes.transform.SetParent(_clothes.transform);
     }
 
     private void UpdateDisplayImages()
