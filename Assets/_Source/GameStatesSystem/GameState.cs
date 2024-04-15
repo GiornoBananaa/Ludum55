@@ -4,11 +4,11 @@ namespace GameStatesSystem
 {
     public abstract class GameState : IState<GameScreen>
     {
-        protected IStateMachine<GameScreen> Owner;
+        protected Game Owner;
         
         public void SetOwner(IStateMachine<GameScreen> owner)
         {
-            Owner = owner;
+            Owner = (Game)owner;
         }
 
         public abstract void Enter();

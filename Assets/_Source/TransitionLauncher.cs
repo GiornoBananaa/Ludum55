@@ -1,4 +1,5 @@
 using System;
+using AudioSystem;
 using CameraSystem;
 using Core;
 using GameStatesSystem;
@@ -14,9 +15,11 @@ public class TransitionLauncher : MonoBehaviour
     private Game _game;
     private int _current;
     private GameScreen[] _gameScreens = (GameScreen[])Enum.GetValues(typeof(GameScreen));
+    private AudioPlayer _audioPlayer;
     
-    public void Construct(Game game,CinemachineMoving cineMachineMoving)
+    public void Construct(Game game,CinemachineMoving cineMachineMoving,AudioPlayer audioPlayer)
     {
+        _audioPlayer = audioPlayer;
         _game = game;
         _cineMachineMoving = cineMachineMoving;
     }
@@ -49,6 +52,7 @@ public class TransitionLauncher : MonoBehaviour
         {
             _current = _gameScreens.Length - 1;
         }
+        _audioPlayer.Play(Sounds.ScreenTransition);
         _cineMachineMoving.MoveLeft();
         _game.ChangeState(_gameScreens[_current]);
     }
@@ -63,7 +67,7 @@ public class TransitionLauncher : MonoBehaviour
         {
             _current = 0;
         }
-        
+        _audioPlayer.Play(Sounds.ScreenTransition);
         _cineMachineMoving.MoveRight();
         _game.ChangeState(_gameScreens[_current]);
     }

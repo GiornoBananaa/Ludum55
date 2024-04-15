@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SummoningGame;
+using UnityEngine;
 
 namespace GameStatesSystem
 {
@@ -6,11 +7,13 @@ namespace GameStatesSystem
     {
         private Transform _boxInPackaging;
         private Transform _boxInSummoning;
+        private Lighter _lighter;
 
-        public DemonSummoningGameState(Transform boxInPackaging,Transform boxInSummoning)
+        public DemonSummoningGameState(Transform boxInPackaging,Transform boxInSummoning, Lighter lighter)
         {
             _boxInPackaging = boxInPackaging;
             _boxInSummoning = boxInSummoning;
+            _lighter = lighter;
         }
         
         public override void Enter()
@@ -36,7 +39,12 @@ namespace GameStatesSystem
 
         public override void Reset()
         {
-            
+            _lighter.Reset();
+            foreach (Transform child in _boxInPackaging)
+            {
+                if(child.TryGetComponent(out LineRenderer line))
+                    Object.Destroy(line.gameObject);
+            }
         }
     }
 }

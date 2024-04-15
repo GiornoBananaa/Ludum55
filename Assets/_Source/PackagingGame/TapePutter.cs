@@ -1,4 +1,5 @@
 using System;
+using AudioSystem;
 using UnityEngine;
 
 namespace PackagingGame
@@ -11,8 +12,28 @@ namespace PackagingGame
         [SerializeField] private float _maskStartY;
         [SerializeField] private float _maskEndY;
         private float _lastTapeY;
-
+        private AudioPlayer _audioPlayer;
+        private bool _puttingTape;
+        
         public Action OnTapePutted;
+        
+        public bool PuttingTape
+        {
+            get => _puttingTape;
+            set
+            {
+                if(_puttingTape &&  !value)
+                    _audioPlayer.Stop(Sounds.TapePutting);
+                else if(!_puttingTape &&  value)
+                    _audioPlayer.Play(Sounds.TapePutting);
+                _puttingTape = value;
+            }
+        }
+
+        public void Construct(AudioPlayer audioPlayer)
+        {
+            _audioPlayer = audioPlayer;
+        }
         
         private void Awake()
         {
@@ -33,6 +54,7 @@ namespace PackagingGame
                 {
                     if (_tape.transform.position.y < _lastTapeY)
                     {
+                        PuttingTape = true;
                         _lastTapeY = _tape.transform.position.y;
                         float percent = (_lastTapeY-_maskStartY)/(_maskEndY-_maskStartY);
                         _mask.position = new Vector2(_mask.position.x, 
@@ -43,7 +65,19 @@ namespace PackagingGame
                             OnTapePutted?.Invoke();
                         }
                     }
+                    else
+                    {
+                        PuttingTape = false;
+                    }
                 }
+                else
+                {
+                    PuttingTape = false;
+                }
+            }
+            else
+            {
+                PuttingTape = false;
             }
         }
         

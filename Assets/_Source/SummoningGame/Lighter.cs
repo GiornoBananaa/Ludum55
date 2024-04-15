@@ -75,7 +75,6 @@ namespace SummoningGame
                     Candle candle = collider.GetComponent<Candle>();
                     if (candle.LightCandle())
                     {
-                        Debug.Log(_candelsInOrder.Count +" "+ _lightedCandles.Count);
                         if (_candelsInOrder[_lightedCandles.Count] != candle)
                         {
                             foreach (var c in _candles)

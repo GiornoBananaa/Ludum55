@@ -651,6 +651,7 @@ GameObject:
   - component: {fileID: 5011834024473476937}
   - component: {fileID: 8227054515005393040}
   - component: {fileID: 3741525697265921935}
+  - component: {fileID: 7808685589237019248}
   - component: {fileID: 5172547653545847758}
   m_Layer: 5
   m_Name: Task
@@ -742,6 +743,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7808685589237019248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6325446568710155230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e2de2babd944a2a2d830fc8a9831a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _taskText: {fileID: 4612440678816709674}
 --- !u!114 &5172547653545847758
 MonoBehaviour:
   m_ObjectHideFlags: 0
