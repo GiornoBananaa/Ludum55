@@ -13,7 +13,7 @@ namespace GameStatesSystem
 
         public Dictionary<GameScreen, GameState> Construct(SwitchClothes switchClothes, SwitchBodyParts switchBodyParts,
             Transform boxInPackaging,Transform boxInSummoning,TaskGeneration taskGeneration, EndResultView endResultView,
-            Lighter lighter, DraggableItem[] draggableItemsInBox)
+            Lighter lighter, DraggableItem[] draggableItemsInBox,Tape tape,Mark[] marks)
         {
             
             _gameStates = new Dictionary<GameScreen, GameState>()
@@ -22,7 +22,7 @@ namespace GameStatesSystem
                 {GameScreen.DemonOutfitChoice, new OutfitChoiceGameState(switchClothes,switchBodyParts)},
                 {GameScreen.Packaging, new PackagingGameState(draggableItemsInBox)},
                 {GameScreen.DemonSummoning, new DemonSummoningGameState(boxInPackaging,boxInSummoning,lighter)},
-                {GameScreen.DemonSummoning, new EndResultGameState(switchBodyParts,switchClothes,endResultView,taskGeneration)},
+                {GameScreen.EndResult, new EndResultGameState(switchBodyParts,switchClothes,endResultView,taskGeneration,tape,marks)},
             };
             
             return _gameStates;

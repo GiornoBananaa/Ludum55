@@ -11,6 +11,7 @@ namespace PackagingGame
         private Vector2 _normalScale;
         private Vector2 _offset;
         private Vector2 _defaultPosition;
+        private bool _isAnimation;
 
         public Action OnDragStart;
         public Action OnDragEnd;
@@ -27,7 +28,7 @@ namespace PackagingGame
         
         public void OnMouseDown()
         {
-            if (!enabled) return;
+            if (!enabled || _isAnimation) return;
             IsDragged = true;
             transform.localScale = _normalScale * _scaleFactor;
             transform.SetAsLastSibling();
@@ -37,7 +38,7 @@ namespace PackagingGame
         
         public void OnMouseUp()
         {
-            if (!enabled) return;
+            if (!enabled || _isAnimation) return;
             IsDragged = false;
             transform.localScale = _normalScale;
             OnDragEnd?.Invoke();
@@ -47,7 +48,7 @@ namespace PackagingGame
         
         public void OnMouseDrag()
         {
-            if (!enabled) return;
+            if (!enabled || _isAnimation) return;
             Vector2 mouseWorldPos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
             transform.position = mouseWorldPos + _offset;
             OnDrag?.Invoke();
@@ -55,7 +56,8 @@ namespace PackagingGame
         
         public void ReturnToDefaultPosition()
         {
-            transform.DOLocalMove(_defaultPosition, 0.2f);
+            _isAnimation = true;
+            transform.DOLocalMove(_defaultPosition, 0.2f).OnComplete(()=>_isAnimation=false);
         }
     }
 }

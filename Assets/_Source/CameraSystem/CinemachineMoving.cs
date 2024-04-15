@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using DG.Tweening;
+using GameStatesSystem;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -25,6 +26,7 @@ namespace CameraSystem
         private LinkedListNode<CameraData> _currentCameraNode;
         private Coroutine _currentCoroutine;
         private CameraData _cameraIndex;
+        private Transform _start;
         
         public bool IsMoving { get; private set; }
         
@@ -33,6 +35,7 @@ namespace CameraSystem
             _camerasInCircle = new LinkedList<CameraData>(_cameraDatas);
             _currentCameraNode = _camerasInCircle.First;
             IsMoving = false;
+            _start = _currentCameraNode.Value.CameraFollowObject;
         }
 
         public void MoveLeft()
@@ -74,8 +77,28 @@ namespace CameraSystem
             
             MoveCamera(_currentCameraNode.Value.CameraFollowObject.transform.position);
         }
-    
-        public void MoveCamera(Vector2 position)
+
+        public void MoveStart()
+        {
+            var currPos = _currentCamera.transform.position;
+            Vector2 newPos = new Vector2(currPos.x+_camerasMinDistance,currPos.y);
+            
+            foreach (var cameraData in _camerasInCircle)
+            {
+                if (cameraData.CameraFollowObject == _start)
+                {
+                    _currentCameraNode = _camerasInCircle.Find(cameraData);
+                    break;
+                }
+            }
+            
+            _camerasInCircle.First.Value.CameraFollowObject.position = newPos;
+            
+            MoveCamera(_currentCameraNode.Value.CameraFollowObject.transform.position);
+        }
+        
+        
+        private void MoveCamera(Vector2 position)
         {
             IsMoving = true;
             _currentCamera.transform.DOMove(new Vector3(position.x,position.y,_currentCamera.transform.position.z),_switchDuration).OnComplete(()=>IsMoving=false);

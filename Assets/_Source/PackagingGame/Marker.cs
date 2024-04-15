@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.Design;
-using AudioSystem;
+﻿using AudioSystem;
 using UnityEngine;
 
 namespace PackagingGame

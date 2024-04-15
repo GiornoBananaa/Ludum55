@@ -1,9 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using AudioSystem;
+using GameStatesSystem;
 using PackagingGame;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace SummoningGame
@@ -28,6 +28,37 @@ namespace SummoningGame
         private List<Candle> _lightedCandles = new List<Candle>();
         private Collider2D _lastCollider;
         private int _setupedCandles;
+        private bool _isBurning;
+        private AudioPlayer _audioPlayer;
+        private Game _game;
+        
+        public bool IsBurning
+        {
+            get => _isBurning;
+            set
+            {
+                if(!_isBurning &&  value)
+                {
+                    _draggable.enabled = true;
+                    _spriteRenderer.sprite = _lightenedSprite;
+                    _audioPlayer.Stop(Sounds.BurningLighter);
+                }
+                else if(_isBurning &&  !value)
+                {
+                    _draggable.enabled = false;
+                    _draggable.ReturnToDefaultPosition();
+                    _spriteRenderer.sprite = _closedSprite;
+                    _audioPlayer.Play(Sounds.BurningLighter);
+                }
+                _isBurning = value;
+            }
+        }
+        
+        public void Construct(AudioPlayer audioPlayer, Game game)
+        {
+            _audioPlayer = audioPlayer;
+            _game = game;
+        }
         
         private void Start()
         {
@@ -41,6 +72,8 @@ namespace SummoningGame
             {
                 candle.OnCandleSetup += SetupCandle;
             }
+            _draggable.OnDragStart += PlayLighterSound;
+            _draggable.OnDragEnd += PlayLighterSound;
         }
 
         private void SetupCandle()
@@ -48,8 +81,7 @@ namespace SummoningGame
             _setupedCandles++;
             if (_setupedCandles >= _candles.Length)
             {
-                _spriteRenderer.sprite = _lightenedSprite;
-                _draggable.enabled = true;
+                IsBurning = true;
                 StartCoroutine(OrderHighlighting());
             }
         }
@@ -115,16 +147,23 @@ namespace SummoningGame
             {
                 candle.Reset();
             }
+            _box.transform.SetParent(transform.parent);
             _lightedCandles.Clear();
-            _draggable.enabled = false;
+            IsBurning = false;
             _box.enabled = false;
-            _box.ReturnToDefaultPosition();
             _box.gameObject.SetActive(true);
+            _box.ReturnToDefaultPosition();
             _setupedCandles = 0;
-            _spriteRenderer.sprite = _closedSprite;
+            _pentagramSpriteRenderer.sprite = _defaultPentagram;
+            _draggable.enabled = false;
             ShuffleCandlesOrder();
         }
-
+        
+        private void PlayLighterSound()
+        {
+            _audioPlayer.Play(Sounds.LighterInteraction);
+        }
+        
         private void CheckBox()
         {
             Collider2D collider = Physics2D.OverlapPoint(_box.transform.position, _pentagramLayerMask);
@@ -154,9 +193,11 @@ namespace SummoningGame
         
         private IEnumerator BoxSending()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
             _pentagramSpriteRenderer.sprite = _activatedPentagram;
+            _audioPlayer.Play(Sounds.PentagramActivation);
             yield return new WaitForSeconds(1);
+            _audioPlayer.Play(Sounds.PackageSend);
             _box.gameObject.SetActive(false);
             foreach (var c in _candles)
             {
@@ -164,7 +205,7 @@ namespace SummoningGame
             }
             _pentagramSpriteRenderer.sprite = _defaultPentagram;
             yield return new WaitForSeconds(1);
-            // open end panel
+            _game.ChangeState(GameScreen.EndResult);
         }
         
         private void OnDestroy()

@@ -1,4 +1,5 @@
-﻿using TaskSystem;
+﻿using PackagingGame;
+using TaskSystem;
 
 namespace GameStatesSystem
 {
@@ -8,13 +9,18 @@ namespace GameStatesSystem
         private SwitchClothes _switchClothes;
         private EndResultView _endResultView;
         private TaskGeneration _taskGeneration;
+        private Tape _tape;
+        private Mark[] _marks;
 
-        public EndResultGameState(SwitchBodyParts switchBodyParts, SwitchClothes switchClothes, EndResultView endResultView, TaskGeneration taskGeneration)
+        public EndResultGameState(SwitchBodyParts switchBodyParts, SwitchClothes switchClothes, 
+            EndResultView endResultView, TaskGeneration taskGeneration,Tape tape,Mark[] marks)
         {
             _switchBodyParts = switchBodyParts;
             _switchClothes = switchClothes;
             _endResultView = endResultView;
             _taskGeneration = taskGeneration;
+            _tape = tape;
+            _marks = marks;
         }
 
         public override void Enter()
@@ -38,6 +44,11 @@ namespace GameStatesSystem
         public override void Reset()
         {
             _taskGeneration.GenerateTask();
+            _tape.Reset();
+            foreach (var mark in _marks)
+            {
+                mark.transform.SetParent(mark.transform.parent.parent);
+            }
         }
     }
 }

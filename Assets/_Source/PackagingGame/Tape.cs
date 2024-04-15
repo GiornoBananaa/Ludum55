@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PackagingGame
 {
-    public class TapePutter : MonoBehaviour
+    public class Tape : MonoBehaviour
     {
         [SerializeField] private LayerMask _maskLayerMask;
         [SerializeField] private Transform _mask;
@@ -14,6 +14,7 @@ namespace PackagingGame
         private float _lastTapeY;
         private AudioPlayer _audioPlayer;
         private bool _puttingTape;
+        private Vector2 _maskDefault;
         
         public Action OnTapePutted;
         
@@ -38,6 +39,7 @@ namespace PackagingGame
         private void Awake()
         {
             _lastTapeY = _mask.position.y;
+            _maskDefault = _mask.localPosition;
         }
 
         private void Update()
@@ -84,7 +86,9 @@ namespace PackagingGame
         public void Reset()
         {
             _lastTapeY = 0;
-            _mask.position = _mask.position = new Vector2(_mask.position.x, _maskStartY);
+            _mask.localPosition = _maskDefault;
+            _tape.enabled = true;
+            _tape.ReturnToDefaultPosition();
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using AudioSystem;
 using PackagingGame;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -18,16 +19,25 @@ namespace SummoningGame
         
         private bool _isLighted = false;
         private bool _isSetuped= false;
+        private AudioPlayer _audioPlayer;
         
         public event Action OnCandleSetup;
         public event Action OnCandleLighted;
+
+        public void Construct(AudioPlayer audioPlayer)
+        {
+            _audioPlayer = audioPlayer;
+        }
         
         private void Start()
         {
             _spriteRenderer.sprite = _extinguishSprite;
             _draggable.OnDragEnd += CheckSurface;
+            _draggable.OnDragStart += PlayCandleSound;
+            _draggable.OnDragEnd += PlayCandleSound;
         }
-
+        
+        
         public bool LightCandle()
         {
             if (_isLighted || !_isSetuped) return false;
@@ -73,17 +83,30 @@ namespace SummoningGame
                 _draggable.ReturnToDefaultPosition();
             }
         }
+
+        private void PlayCandleSound()
+        {
+            _audioPlayer.Play(Sounds.CandleInteraction);
+        }
         
         public void Reset()
         {
-            _isSetuped = false;
+            if (_isSetuped)
+            {
+                _draggable.transform.SetParent(transform.parent.parent.parent);
+                _isSetuped = false;
+            }
+            
             ExtinguishCandle();
+            _draggable.enabled = true;
             _draggable.ReturnToDefaultPosition();
         }
 
         private void OnDestroy()
         {
             _draggable.OnDragEnd -= CheckSurface;
+            _draggable.OnDragStart -= PlayCandleSound;
+            _draggable.OnDragEnd -= PlayCandleSound;
         }
     }
 }

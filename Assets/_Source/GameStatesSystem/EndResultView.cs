@@ -11,16 +11,18 @@ namespace GameStatesSystem
         [SerializeField] private TaskCall _taskCall;
         [SerializeField] private TMP_Text _taskResultText;
         [SerializeField] private TMP_Text _overallPointsText;
-        private Game _game;
 
-        public void Construct(Game game)
+        private TransitionLauncher _transitionLauncher;
+        
+        public void Construct(TransitionLauncher transitionLauncher)
         {
-            _game = game;
+            _transitionLauncher = transitionLauncher;
         }
         
         private void Start()
         {
             _continueButton.onClick.AddListener(NextTask);
+            _taskCall.TaskDisable();
         }
 
         public void SetResults(int head,int body,int legs,int headClothes,int bodyClothes,int legsClothes)
@@ -47,7 +49,7 @@ namespace GameStatesSystem
         
         private void NextTask()
         {
-            _game.ChangeState(GameScreen.DemonBodyChoice);
+            _transitionLauncher.MoveStart();
         }
     }
 }

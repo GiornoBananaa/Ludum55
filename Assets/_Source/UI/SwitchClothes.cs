@@ -1,13 +1,11 @@
 using System.Collections.Generic;
+using AudioSystem;
+using TaskSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SwitchClothes : MonoBehaviour
 {
-    [SerializeField] private List<Sprite> _headClothesImages;
-    [SerializeField] private List<Sprite> _bodyClothesImages;
-    [SerializeField] private List<Sprite> _legsClothesImages;
-
     [SerializeField] private Button _nextHeadClothes;
     [SerializeField] private Button _previousHeadClothes;
     [SerializeField] private Button _nextBodyClothes;
@@ -26,54 +24,63 @@ public class SwitchClothes : MonoBehaviour
     [SerializeField] private GameObject _clothes;
     [SerializeField] private GameObject _clothesUnderDemon;
 
-    public Sprite ImageHeadClothes => _headClothesImages[_currentIndexHead];
-    public Sprite ImageBodyClothes => _bodyClothesImages[_currentIndexBody];
-    public Sprite ImageLegsClothes => _legsClothesImages[_currentIndexLegs];
+    public Sprite ImageHeadClothes => _demonParts.HeadClothes[_currentIndexHead].Sprite;
+    public Sprite ImageBodyClothes => _demonParts.BodyClothes[_currentIndexBody].Sprite;
+    public Sprite ImageLegsClothes => _demonParts.LegsClothes[_currentIndexLegs].Sprite;
 
     private int _currentIndexHead = 0;
     private int _currentIndexBody = 0;
     private int _currentIndexLegs = 0;
+    private DemonParts _demonParts;
+    private AudioPlayer _audioPlayer;
 
+    public void Construct(DemonParts demonParts, AudioPlayer audioPlayer)
+    {
+        _demonParts = demonParts;
+        _audioPlayer = audioPlayer;
+    }
+    
     private void Start()
     {
-        _nextHeadClothes.onClick.AddListener(() => ChangeImage(_headClothesImages, _displayImageHeadClothes, ref _currentIndexHead, 1));
-        _previousHeadClothes.onClick.AddListener(() => ChangeImage(_headClothesImages, _displayImageHeadClothes, ref _currentIndexHead, -1));
-        _nextBodyClothes.onClick.AddListener(() => ChangeImage(_bodyClothesImages, _displayImageBodyClothes, ref _currentIndexBody, 1));
-        _previousBodyClothes.onClick.AddListener(() => ChangeImage(_bodyClothesImages, _displayImageBodyClothes, ref _currentIndexBody, -1));
-        _nextLegsClothes.onClick.AddListener(() => ChangeImage(_legsClothesImages, _displayImageLegsClothes, ref _currentIndexLegs, 1));
-        _previousLegsClothes.onClick.AddListener(() => ChangeImage(_legsClothesImages, _displayImageLegsClothes, ref _currentIndexLegs, -1));
+        _nextHeadClothes.onClick.AddListener(() => ChangeImage(_demonParts.HeadClothes, _displayImageHeadClothes, ref _currentIndexHead, 1));
+        _previousHeadClothes.onClick.AddListener(() => ChangeImage(_demonParts.HeadClothes, _displayImageHeadClothes, ref _currentIndexHead, -1));
+        _nextBodyClothes.onClick.AddListener(() => ChangeImage(_demonParts.BodyClothes, _displayImageBodyClothes, ref _currentIndexBody, 1));
+        _previousBodyClothes.onClick.AddListener(() => ChangeImage(_demonParts.BodyClothes, _displayImageBodyClothes, ref _currentIndexBody, -1));
+        _nextLegsClothes.onClick.AddListener(() => ChangeImage(_demonParts.LegsClothes, _displayImageLegsClothes, ref _currentIndexLegs, 1));
+        _previousLegsClothes.onClick.AddListener(() => ChangeImage(_demonParts.LegsClothes, _displayImageLegsClothes, ref _currentIndexLegs, -1));
 
         UpdateDisplayImages();
     }
-
-    private void ChangeImage(List<Sprite> images, Image displayImage, ref int currentIndex, int direction)
+    
+    private void ChangeImage(DemonPart[] demonParts, Image displayImage, ref int currentIndex, int direction)
     {
-        currentIndex = (currentIndex + direction + images.Count) % images.Count;
-        displayImage.sprite = currentIndex >= 0 ? images[currentIndex] : null;
+        _audioPlayer.Play(Sounds.SwitchClothes);
+        currentIndex = (currentIndex + direction + demonParts.Length) % demonParts.Length;
+        displayImage.sprite = currentIndex >= 0 ? demonParts[currentIndex].Sprite : null;
 
-        if (images == _bodyClothesImages & _currentIndexBody == 3)
-            _displayImageBodyClothes.transform.SetParent(_clothesUnderDemon.transform);
-        else if (images == _bodyClothesImages)
-            _displayImageBodyClothes.transform.SetParent(_clothes.transform);
+        if (demonParts == _demonParts.BodyClothes & _currentIndexBody == 3)
+            displayImage.transform.SetParent(_clothesUnderDemon.transform);
+        else if (demonParts == _demonParts.BodyClothes)
+            displayImage.transform.SetParent(_clothes.transform);
 
-        if (images == _legsClothesImages & _currentIndexLegs == 3)
-            _displayImageLegsClothes.transform.SetParent(_clothesUnderDemon.transform);
-        else if (images == _legsClothesImages)
-            _displayImageLegsClothes.transform.SetParent(_clothes.transform);
+        if (demonParts == _demonParts.LegsClothes & _currentIndexLegs == 3)
+            displayImage.transform.SetParent(_clothesUnderDemon.transform);
+        else if (demonParts == _demonParts.LegsClothes)
+            displayImage.transform.SetParent(_clothes.transform);
     }
 
     private void UpdateDisplayImages()
     {
-        _displayImageHeadClothes.sprite = _currentIndexHead >= 0 ? _headClothesImages[_currentIndexHead] : null;
-        _displayImageBodyClothes.sprite = _currentIndexBody >= 0 ? _bodyClothesImages[_currentIndexBody] : null;
-        _displayImageLegsClothes.sprite = _currentIndexLegs >= 0 ? _legsClothesImages[_currentIndexLegs] : null;
+        _displayImageHeadClothes.sprite = _currentIndexHead >= 0 ? _demonParts.HeadClothes[_currentIndexHead].Sprite : null;
+        _displayImageBodyClothes.sprite = _currentIndexBody >= 0 ? _demonParts.BodyClothes[_currentIndexBody].Sprite : null;
+        _displayImageLegsClothes.sprite = _currentIndexLegs >= 0 ? _demonParts.LegsClothes[_currentIndexLegs].Sprite : null;
     }
 
     public void ResetDisplayImages()
     {
-        _displayImageHeadClothes.sprite = _headClothesImages[0];
-        _displayImageBodyClothes.sprite = _bodyClothesImages[0];
-        _displayImageLegsClothes.sprite = _legsClothesImages[0];
+        _displayImageHeadClothes.sprite = _demonParts.HeadClothes[0].Sprite;
+        _displayImageBodyClothes.sprite = _demonParts.BodyClothes[0].Sprite;
+        _displayImageLegsClothes.sprite = _demonParts.LegsClothes[0].Sprite;
         _currentIndexHead = 0;
         _currentIndexBody = 0;
         _currentIndexLegs = 0;

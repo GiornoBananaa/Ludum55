@@ -42,7 +42,7 @@ public class TransitionLauncher : MonoBehaviour
         }
     }
 
-    private void MoveLeft()
+    public void MoveLeft()
     {
         if(_cineMachineMoving.IsMoving) 
             return;
@@ -50,25 +50,42 @@ public class TransitionLauncher : MonoBehaviour
         _current--;
         if (_current < 0)
         {
-            _current = _gameScreens.Length - 1;
+            _current = _gameScreens.Length - 2;
         }
         _audioPlayer.Play(Sounds.ScreenTransition);
         _cineMachineMoving.MoveLeft();
         _game.ChangeState(_gameScreens[_current]);
     }
     
-    private void MoveRight()
+    public void MoveRight()
     {
         if(_cineMachineMoving.IsMoving) 
             return;
         
         _current++;
-        if (_current >= _gameScreens.Length)
+        if (_current >= _gameScreens.Length - 1)
         {
             _current = 0;
         }
         _audioPlayer.Play(Sounds.ScreenTransition);
         _cineMachineMoving.MoveRight();
+        _game.ChangeState(_gameScreens[_current]);
+    }
+
+    public void MoveStart()
+    {
+        _current++;
+        for (int i = 0; i < _gameScreens.Length-1; i++)
+        {
+            if (_gameScreens[i] == GameScreen.DemonBodyChoice)
+            {
+                _current = i;
+                break;
+            }
+        }
+        
+        _audioPlayer.Play(Sounds.ScreenTransition);
+        _cineMachineMoving.MoveStart();
         _game.ChangeState(_gameScreens[_current]);
     }
 }

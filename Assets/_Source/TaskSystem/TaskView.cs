@@ -9,6 +9,7 @@ namespace TaskSystem
         
         public void SetTaskText(DemonPart head,DemonPart body,DemonPart legs,DemonPart headClothes,DemonPart bodyClothes,DemonPart legsClothes)
         {
+             if(head.Descriptions.Length == 0) return;
             _taskText.text =
                 $"Голова - {head.Descriptions[Random.Range(0, head.Descriptions.Length)]}\n" +
                 $"Тело - {body.Descriptions[Random.Range(0, body.Descriptions.Length)]}\n" +

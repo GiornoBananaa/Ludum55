@@ -6,5 +6,6 @@
         DemonOutfitChoice = 1,
         Packaging = 2,
         DemonSummoning = 3,
+        EndResult = 4,
     }
 }
