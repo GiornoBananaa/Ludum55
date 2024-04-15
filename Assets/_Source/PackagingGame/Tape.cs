@@ -68,10 +68,6 @@ namespace PackagingGame
                             OnTapePutted?.Invoke();
                         }
                     }
-                    else
-                    {
-                        PuttingTape = false;
-                    }
                 }
                 else
                 {

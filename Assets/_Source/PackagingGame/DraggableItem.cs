@@ -57,9 +57,9 @@ namespace PackagingGame
                 ReturnToDefaultPosition();
         }
         
-        public void OnMouseDrag()
+        public void Update()
         {
-            if (!enabled || _isAnimation) return;
+            if (!IsDragged || !enabled || _isAnimation) return;
             Vector2 mouseWorldPos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
             transform.position = mouseWorldPos + _offset;
             OnDrag?.Invoke();
@@ -67,13 +67,13 @@ namespace PackagingGame
         
         public void ReturnToDefaultPosition()
         {
+            _isAnimation = true;
             if(IsDragged)
             {
-                OnDragEnd?.Invoke();
                 IsDragged = false;
                 transform.localScale = _normalScale;
+                OnDragEnd?.Invoke();
             }
-            _isAnimation = true;
             transform.DOLocalMove(_defaultPosition, 0.2f).OnComplete(()=>_isAnimation=false);
         }
     }

@@ -30,6 +30,7 @@ namespace SummoningGame
         private int _setupedCandles;
         private bool _isBurning;
         private AudioPlayer _audioPlayer;
+        private Coroutine _orderHighlightingCoroutine;
         private Game _game;
         
         public bool IsBurning
@@ -41,12 +42,14 @@ namespace SummoningGame
                 {
                     _draggable.enabled = true;
                     _spriteRenderer.sprite = _lightenedSprite;
+                    PlayFireSound();
                 }
                 else if(_isBurning &&  !value)
                 {
-                    _draggable.enabled = false;
                     _draggable.ReturnToDefaultPosition();
+                    _draggable.enabled = false;
                     _spriteRenderer.sprite = _closedSprite;
+                    StopFireSound();
                 }
                 _isBurning = value;
             }
@@ -75,8 +78,6 @@ namespace SummoningGame
             {
                 candle.OnCandleSetup += SetupCandle;
             }
-            _draggable.OnDragStart += PlayFireSound;
-            _draggable.OnDragEnd += StopFireSound;
         }
 
         private void SetupCandle()
@@ -119,7 +120,9 @@ namespace SummoningGame
                             }
                             _lightedCandles.Clear();
                             _draggable.ReturnToDefaultPosition();
-                            StartCoroutine(OrderHighlighting());
+                            if(_orderHighlightingCoroutine!=null)
+                                StopCoroutine(_orderHighlightingCoroutine);
+                            _orderHighlightingCoroutine = StartCoroutine(OrderHighlighting());
                         }
                         else
                         {
@@ -131,6 +134,7 @@ namespace SummoningGame
                                 {
                                     c.ActivateCandle();
                                 }
+                                
                                 _box.enabled = true;
                                 _draggable.enabled = false;
                                 _draggable.ReturnToDefaultPosition();
@@ -213,6 +217,7 @@ namespace SummoningGame
             {
                 c.ExtinguishCandle();
             }
+            IsBurning = false;
             _pentagramSpriteRenderer.sprite = _defaultPentagram;
             yield return new WaitForSeconds(1);
             _game.ChangeState(GameScreen.EndResult);
@@ -221,8 +226,6 @@ namespace SummoningGame
         private void OnDestroy()
         {
             _draggable.OnDrag -= CheckSurface;
-            _draggable.OnDragStart -= PlayFireSound;
-            _draggable.OnDragEnd -= StopFireSound;
             foreach (var candle in _candles)
             {
                 candle.OnCandleSetup -= SetupCandle;
