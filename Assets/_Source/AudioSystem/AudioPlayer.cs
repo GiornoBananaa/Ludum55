@@ -135,5 +135,13 @@ namespace AudioSystem
             PlayerPrefs.SetFloat("SoundVolume", SoundVolume);
             PlayerPrefs.Save();
         }
+        
+        public void Stop(Sounds soundType)
+        {
+            if (_soundSources.TryGetValue(soundType, out var source))
+            {
+                source.Stop();
+            }
+        }
     }
 }

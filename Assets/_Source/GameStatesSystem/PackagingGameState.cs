@@ -5,8 +5,13 @@ namespace GameStatesSystem
 {
     public class PackagingGameState : GameState
     {
-        private TapePutter _tapePutter;
-        //TODO Save values in Game
+        private DraggableItem[] _draggableItems;
+
+        public PackagingGameState(DraggableItem[] draggableItems)
+        {
+            _draggableItems = draggableItems;
+        }
+
         public override void Enter()
         {
             
@@ -19,7 +24,11 @@ namespace GameStatesSystem
 
         public override void Reset()
         {
-            
+            foreach (var item in _draggableItems)
+            {
+                item.ReturnToDefaultPosition();
+                item.enabled = true;
+            }
         }
     }
 }

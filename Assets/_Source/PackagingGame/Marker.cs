@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Design;
+using AudioSystem;
 using UnityEngine;
 
 namespace PackagingGame
@@ -20,7 +21,13 @@ namespace PackagingGame
         private Camera _camera;
         private LineRenderer _line;
         private Transform _currentSurface;
+        private AudioPlayer _audioPayer;
 
+        public void Construct(AudioPlayer audioPayer)
+        {
+            _audioPayer = audioPayer;
+        }
+        
         private void Start()
         {
             _camera = Camera.main;
@@ -59,6 +66,7 @@ namespace PackagingGame
         
         private void StartDrawing()
         {
+            _audioPayer.Play(Sounds.Drawing);
             _isDrawing = true;
             CreateNewLine();
             _line.transform.SetParent(_currentSurface);
@@ -67,6 +75,7 @@ namespace PackagingGame
         }
         private void EndDrawing()
         {
+            _audioPayer.Stop(Sounds.Drawing);
             if (_line != null)
             {
                 _markerDrawer.AddLine(_line);

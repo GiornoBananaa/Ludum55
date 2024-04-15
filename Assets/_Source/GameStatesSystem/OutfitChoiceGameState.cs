@@ -2,12 +2,12 @@
 
 namespace GameStatesSystem
 {
-    public class DemonOutfitChoiceGameState : GameState
+    public class OutfitChoiceGameState : GameState
     {
         private readonly SwitchClothes _switchClothes;
         private readonly SwitchBodyParts _switchBodyParts;
 
-        public DemonOutfitChoiceGameState(SwitchClothes switchClothes, SwitchBodyParts switchBodyParts)
+        public OutfitChoiceGameState(SwitchClothes switchClothes, SwitchBodyParts switchBodyParts)
         {
             _switchClothes = switchClothes;
             _switchBodyParts = switchBodyParts;
