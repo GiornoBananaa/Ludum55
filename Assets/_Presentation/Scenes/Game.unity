@@ -2910,7 +2910,7 @@ MonoBehaviour:
   _pentagramSpriteRenderer: {fileID: 679961286}
   _defaultPentagram: {fileID: 21300000, guid: 2d6cb77917afad8449aa7649e086fa17, type: 3}
   _activatedPentagram: {fileID: 21300000, guid: 6d66c8d93011e5946980b3a0134dca46, type: 3}
-  _orderHighlitingDuration: 1
+  _orderHighlitingDuration: 0.4
   _candles:
   - {fileID: 740145831}
   - {fileID: 219235119}
@@ -4593,6 +4593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58c7493581220f34dbdf7f2dd3b74406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _taskCall: {fileID: 0}
 --- !u!4 &1802936233
 Transform:
   m_ObjectHideFlags: 0

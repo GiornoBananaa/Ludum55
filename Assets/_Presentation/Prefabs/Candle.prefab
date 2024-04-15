@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2426407455824720373}
+  - component: {fileID: 8938271867934778947}
   - component: {fileID: 409369051213357485}
   - component: {fileID: 7842703719735140365}
   - component: {fileID: 8853090462504974625}
@@ -35,6 +36,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8938271867934778947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365844384266229716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172c3750ce83ce74f80d1c3b90c7c6b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _outlineMaterial: {fileID: 2100000, guid: d5d643bd9e919784b8cea3a31b34e607, type: 2}
+  _render: {fileID: 8853090462504974625}
 --- !u!114 &409369051213357485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,6 +67,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   _spriteRenderer: {fileID: 8853090462504974625}
+  _spriteOutliner: {fileID: 8938271867934778947}
   _extinguishSprite: {fileID: 21300000, guid: 7a61c9186b1393f45a18786ca320e59e, type: 3}
   _lightenedSprite: {fileID: 21300000, guid: 4bf7b2e00bea1df4f8fba74a4cfc2176, type: 3}
   _activatedSprite: {fileID: 21300000, guid: 76bf28b5955f2f34097dc05591a0bd7d, type: 3}
@@ -89,7 +105,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: af531ae8e3dd9a8439a2dc39930669b3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

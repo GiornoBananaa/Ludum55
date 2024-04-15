@@ -11,6 +11,7 @@ namespace SummoningGame
         [SerializeField] private DraggableItem _draggable;
         [SerializeField] private LayerMask _candleStandLayerMask;
         [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private SpriteOutliner _spriteOutliner;
         [SerializeField] private Sprite _extinguishSprite;
         [SerializeField] private Sprite _lightenedSprite;
         [SerializeField] private Sprite _activatedSprite;
@@ -50,12 +51,12 @@ namespace SummoningGame
 
         public void EnableHighlight()
         {
-            
+            _spriteOutliner.EnableOutline();
         }
 
         public void DisableHighlight()
         {
-            
+            _spriteOutliner.DisableOutline();
         }
         private void CheckSurface()
         {

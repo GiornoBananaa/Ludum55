@@ -13,7 +13,7 @@ namespace SummoningGame
         [SerializeField] private DraggableItem _draggable;
         [SerializeField] private DraggableItem _box;
         [SerializeField] private Transform _lighterPivot;
-        [FormerlySerializedAs("_candleStandLayerMask")] [SerializeField] private LayerMask _candleLayerMask;
+        [SerializeField] private LayerMask _candleLayerMask;
         [SerializeField] private LayerMask _pentagramLayerMask;
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Sprite _lightenedSprite;
@@ -92,8 +92,8 @@ namespace SummoningGame
                             if (_lightedCandles.Count == _candles.Length)
                             {
                                 _box.enabled = true;
-                                _draggable.ReturnToDefaultPosition();
                                 _draggable.enabled = false;
+                                _draggable.ReturnToDefaultPosition();
                             } 
                         }
                     }
@@ -127,8 +127,9 @@ namespace SummoningGame
             Collider2D collider = Physics2D.OverlapPoint(_box.transform.position, _pentagramLayerMask);
             if (collider != null)
             {
-                _draggable.enabled = false;
-                transform.SetParent(collider.transform);
+                _box.enabled = false;
+                _box.enabled = false;
+                _box.transform.SetParent(collider.transform);
                 StartCoroutine(BoxSending());
             }
             else
@@ -139,9 +140,9 @@ namespace SummoningGame
         
         private IEnumerator OrderHighlighting()
         {
+            yield return new WaitForSeconds(_orderHighlitingDuration);
             foreach (var candle in _candelsInOrder)
             {
-                yield return new WaitForSeconds(_orderHighlitingDuration);
                 candle.EnableHighlight();
                 yield return new WaitForSeconds(_orderHighlitingDuration);
                 candle.DisableHighlight();
