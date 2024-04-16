@@ -1,24 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class VolumeValue : MonoBehaviour
+namespace UI
 {
-    private AudioSource _audioSrc;
-    public float _volume;
-
-    void Start()
+    public class VolumeValue : MonoBehaviour
     {
-        _audioSrc = GetComponent<AudioSource>();
-    }
+        private AudioSource _audioSrc;
+        public float _volume;
 
-    void Update()
-    {
-        _audioSrc.volume = _volume;
-    }
+        void Start()
+        {
+            _audioSrc = GetComponent<AudioSource>();
+        }
 
-    public void SetVolume(float vol)
-    {
-        _volume = vol;
+        void Update()
+        {
+            _audioSrc.volume = _volume;
+        }
+
+        public void SetVolume(float vol)
+        {
+            _volume = vol;
+        }
     }
 }

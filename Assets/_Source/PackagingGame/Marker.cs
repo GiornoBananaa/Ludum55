@@ -30,7 +30,7 @@ namespace PackagingGame
         {
             _camera = Camera.main;
         }
-
+        
         private void Update()
         {
             if(!_draggable.IsDragged || !CheckSurface()) return;
@@ -71,6 +71,7 @@ namespace PackagingGame
             _line.endColor = _color;
             _line.startColor = _color;
         }
+        
         private void EndDrawing()
         {
             _audioPayer.Stop(Sounds.Drawing);
@@ -102,7 +103,8 @@ namespace PackagingGame
                 _currentSurface = collider.transform;
                 return true;
             }
-
+            if(_isDrawing)
+                EndDrawing();
             return false;
         }
     }

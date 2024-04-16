@@ -50,7 +50,7 @@ namespace Core
             
             //--
             
-            _audioPlayer.Construct(_audioDataSo.GetSounds());
+            _audioPlayer.Construct(_audioDataSo);
             
             _gameStatesConstructor = new GameStatesConstructor();
             

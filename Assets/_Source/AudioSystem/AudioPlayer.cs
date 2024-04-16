@@ -16,9 +16,14 @@ namespace AudioSystem
         public float SoundVolume { get; private set; }
         public float MusicVolume { get; private set; }
 
-        public void Construct(Dictionary<Sounds,Sound> sounds)
+        public void Construct(AudioDataSO audioDataSo)
         {
-            _sounds = sounds;
+            _sounds = audioDataSo.GetSounds();
+
+            if (audioDataSo.MusicSource == null)
+                audioDataSo.MusicSource = _musicSource;
+            else
+                _musicSource = audioDataSo.MusicSource;
             
             _soundSources = new Dictionary<Sounds, AudioSource>();
             _spatialSources = new Dictionary<Sounds, AudioSource>();

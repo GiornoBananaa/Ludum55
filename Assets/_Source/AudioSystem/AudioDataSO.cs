@@ -10,6 +10,9 @@ namespace AudioSystem
     {
         [field: SerializeField] public Sound[] Sounds { get; private set;}
         
+        [HideInInspector]
+        public AudioSource MusicSource;
+        
         public Dictionary<Sounds,Sound> GetSounds()
         {
             return Sounds.ToDictionary(sound => sound.SoundType);
