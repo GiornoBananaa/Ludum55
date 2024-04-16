@@ -26,6 +26,7 @@ namespace GameStatesSystem
 
         public override void Enter()
         {
+            Owner.OnGameScreenChanged?.Invoke(GameScreen.EndResult);
             _endResultView.SetResults(
                 _taskGeneration.HeadTask.Sprite==_switchBodyParts.ImageHead?111:0,
                 _taskGeneration.BodyTask.Sprite==_switchBodyParts.ImageBody?111:0,

@@ -42,7 +42,8 @@ public class TransitionLauncher : MonoBehaviour
             _current = _gameScreens.Length - 2;
         }
         _audioPlayer.Play(Sounds.ScreenTransition);
-        _cineMachineMoving.MoveLeft().onComplete += ()=>_game.ChangeState(_gameScreens[_current]);
+        _cineMachineMoving.MoveLeft().onComplete += () => _game.OnGameScreenChanged?.Invoke(_gameScreens[_current]);
+        _game.ChangeState(_gameScreens[_current]);
     }
     
     public void MoveRight()
@@ -56,8 +57,8 @@ public class TransitionLauncher : MonoBehaviour
             _current = 0;
         }
         _audioPlayer.Play(Sounds.ScreenTransition);
-        _cineMachineMoving.MoveRight().onComplete += ()=>_game.ChangeState(_gameScreens[_current]);
-        
+        _cineMachineMoving.MoveRight().onComplete += () => _game.OnGameScreenChanged?.Invoke(_gameScreens[_current]);
+        _game.ChangeState(_gameScreens[_current]);
     }
 
     public void MoveStart()
@@ -72,7 +73,8 @@ public class TransitionLauncher : MonoBehaviour
         }
         
         _audioPlayer.Play(Sounds.ScreenTransition);
-        _cineMachineMoving.MoveStart().onComplete += ()=>_game.ChangeState(_gameScreens[_current]);
+        _cineMachineMoving.MoveStart().onComplete += () => _game.OnGameScreenChanged?.Invoke(_gameScreens[_current]);
+        _game.ChangeState(_gameScreens[_current]);
     }
 }
 

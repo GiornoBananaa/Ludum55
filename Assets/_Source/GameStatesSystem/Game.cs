@@ -10,7 +10,7 @@ namespace GameStatesSystem
         private Dictionary<GameScreen,GameState> _states;
         private CinemachineMoving _cineMachineMoving;
 
-        public Action<GameScreen> OnGameStateChanged;
+        public Action<GameScreen> OnGameScreenChanged;
         
         public GameScreen CurrentState { get; private set; }
         
@@ -26,7 +26,6 @@ namespace GameStatesSystem
             CurrentState = state;
             _states[CurrentState].SetOwner(this);
             _states[CurrentState].Enter();
-            OnGameStateChanged?.Invoke(state);
         }
 
         public void Reset()

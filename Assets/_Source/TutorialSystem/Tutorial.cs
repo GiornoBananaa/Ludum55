@@ -64,15 +64,15 @@ namespace TutorialSystem
             {
                 case 3:
                     Hide();
-                    _game.OnGameStateChanged += OnPackageSection;
+                    _game.OnGameScreenChanged += OnPackageSection;
                     break;
                 case 6:
                     Hide();
-                    _game.OnGameStateChanged += OnPentagramSection;
+                    _game.OnGameScreenChanged += OnPentagramSection;
                     break;
                 case 9:
                     Hide();
-                    _game.OnGameStateChanged += OnEndResult;
+                    _game.OnGameScreenChanged += OnEndResult;
                     break;
             }
         }
@@ -82,7 +82,7 @@ namespace TutorialSystem
             if (gameScreen!=GameScreen.Packaging) return;
             
             Show();
-            _game.OnGameStateChanged -= OnPackageSection;
+            _game.OnGameScreenChanged -= OnPackageSection;
         }
         
         private void OnPentagramSection(GameScreen gameScreen)
@@ -90,7 +90,7 @@ namespace TutorialSystem
             if (gameScreen!=GameScreen.DemonSummoning) return;
             
             Show();
-            _game.OnGameStateChanged -= OnPentagramSection;
+            _game.OnGameScreenChanged -= OnPentagramSection;
         }
         
         private void OnEndResult(GameScreen gameScreen)
@@ -98,7 +98,7 @@ namespace TutorialSystem
             if (gameScreen!=GameScreen.EndResult) return;
             
             Show();
-            _game.OnGameStateChanged -= OnEndResult;
+            _game.OnGameScreenChanged -= OnEndResult;
         }
         
         private void Hide()
