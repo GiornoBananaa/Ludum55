@@ -23,7 +23,6 @@ namespace GameStatesSystem
         private void Start()
         {
             _continueButton.onClick.AddListener(NextTask);
-            _taskCall.TaskDisable();
         }
 
         public void SetResults(int head,int body,int legs,int headClothes,int bodyClothes,int legsClothes)

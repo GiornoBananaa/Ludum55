@@ -1085,7 +1085,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: ed63b1c2dab210b4285f8140948a55b8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6469,6 +6469,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasTask
       objectReference: {fileID: 0}
+    - target: {fileID: 3457705910296449230, guid: dae7c6f94b401994cb4fb75c981bb8f4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7488130616957839538, guid: dae7c6f94b401994cb4fb75c981bb8f4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 385.34302
@@ -7583,6 +7587,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4074637444044016548, guid: ddc6dd96ee124f7479476393851f26b4, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7057a98cece925b43b26101473e9584e, type: 2}
     - target: {fileID: 4504709801385017323, guid: ddc6dd96ee124f7479476393851f26b4, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 1.132019

@@ -27,7 +27,7 @@ namespace GameStatesSystem
         public override void Enter()
         {
             _endResultView.SetResults(
-                _taskGeneration.Head.Sprite==_switchBodyParts.ImageHead?111:0,
+                _taskGeneration.HeadTask.Sprite==_switchBodyParts.ImageHead?111:0,
                 _taskGeneration.BodyTask.Sprite==_switchBodyParts.ImageBody?111:0,
                 _taskGeneration.LegsTask.Sprite==_switchBodyParts.ImageLegs?111:0,
                 _taskGeneration.HeadClothesTask.Sprite==_switchClothes.ImageHeadClothes?111:0,
