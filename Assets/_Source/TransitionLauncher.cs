@@ -2,6 +2,7 @@ using System;
 using AudioSystem;
 using CameraSystem;
 using Core;
+using DG.Tweening;
 using GameStatesSystem;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,20 +30,7 @@ public class TransitionLauncher : MonoBehaviour
         _leftButton.onClick.AddListener(MoveLeft);
         _rightButton.onClick.AddListener(MoveRight);
     }
-
-    private void Update()
-    {
-        float horizontalAxis = Input.GetAxisRaw("Horizontal");
-        if (horizontalAxis<0)
-        {
-            MoveLeft();
-        }
-        else if (horizontalAxis>0)
-        {
-            MoveRight();
-        }
-    }
-
+    
     public void MoveLeft()
     {
         if(_cineMachineMoving.IsMoving) 
@@ -54,8 +42,7 @@ public class TransitionLauncher : MonoBehaviour
             _current = _gameScreens.Length - 2;
         }
         _audioPlayer.Play(Sounds.ScreenTransition);
-        _cineMachineMoving.MoveLeft();
-        _game.ChangeState(_gameScreens[_current]);
+        _cineMachineMoving.MoveLeft().onComplete += ()=>_game.ChangeState(_gameScreens[_current]);
     }
     
     public void MoveRight()
@@ -69,8 +56,8 @@ public class TransitionLauncher : MonoBehaviour
             _current = 0;
         }
         _audioPlayer.Play(Sounds.ScreenTransition);
-        _cineMachineMoving.MoveRight();
-        _game.ChangeState(_gameScreens[_current]);
+        _cineMachineMoving.MoveRight().onComplete += ()=>_game.ChangeState(_gameScreens[_current]);
+        
     }
 
     public void MoveStart()
@@ -85,8 +72,7 @@ public class TransitionLauncher : MonoBehaviour
         }
         
         _audioPlayer.Play(Sounds.ScreenTransition);
-        _cineMachineMoving.MoveStart();
-        _game.ChangeState(_gameScreens[_current]);
+        _cineMachineMoving.MoveStart().onComplete += ()=>_game.ChangeState(_gameScreens[_current]);
     }
 }
 

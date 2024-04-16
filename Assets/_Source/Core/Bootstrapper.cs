@@ -5,6 +5,7 @@ using InputSystem;
 using PackagingGame;
 using SummoningGame;
 using TaskSystem;
+using TutorialSystem;
 using UI;
 using UnityEngine;
 
@@ -26,6 +27,7 @@ namespace Core
         [SerializeField] private TaskCall _tasksViewTaskCall;
         [SerializeField] private TaskCall _resultTaskCall;
         [SerializeField] private EndResultView _endResultView;
+        [SerializeField] private Tutorial _tutorial;
         [SerializeField] private Lighter _lighter;
         [SerializeField] private DraggableItem[] _draggableItemsInBox;
         [SerializeField] private DraggableItem[] _draggableItems;
@@ -53,7 +55,7 @@ namespace Core
             _audioPlayer.Construct(_audioDataSo);
             
             _gameStatesConstructor = new GameStatesConstructor();
-            
+            _tasksViewTaskCall.Construct(_audioPlayer);
             _taskGeneration = new TaskGeneration(_taskView,_demonParts);
             _switchBodyParts.Construct(_demonParts,_audioPlayer);
             _switchClothes.Construct(_demonParts,_audioPlayer);
@@ -61,7 +63,7 @@ namespace Core
             _game = new Game(_gameStatesConstructor.Construct(_switchClothes,_switchBodyParts,
                 _boxInPackaging,_boxInSummoning, _taskGeneration,_endResultView,_lighter,_draggableItemsInBox,_tape,_marks));
             _game.ChangeState(GameScreen.DemonBodyChoice);
-            _inputListener.Construct();
+            _inputListener.Construct(_transitionLauncher);
             _transitionLauncher.Construct(_game, _cineMachineMoving,_audioPlayer);
             _endResultView.Construct(_transitionLauncher);
             foreach (var candle in _candles)
@@ -80,7 +82,8 @@ namespace Core
             _lighter.Construct(_audioPlayer, _game);
             _tape.Construct(_audioPlayer);
             _resultTaskCall.Construct(_audioPlayer);
-            _tasksViewTaskCall.Construct(_audioPlayer);
+            _tutorial.Construct(_game, _inputListener);
+            _tutorial.StartTutorial();
         }
     }
 }

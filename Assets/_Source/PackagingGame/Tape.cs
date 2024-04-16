@@ -14,9 +14,8 @@ namespace PackagingGame
         private float _lastTapeY;
         private AudioPlayer _audioPlayer;
         private bool _puttingTape;
+        private bool _tapeIsPutted;
         private Vector2 _maskDefault;
-        
-        public Action OnTapePutted;
         
         public bool PuttingTape
         {
@@ -54,22 +53,22 @@ namespace PackagingGame
                 Collider2D collider = Physics2D.OverlapPoint(_tape.transform.position, _maskLayerMask);
                 if (collider != null && collider.transform == _mask)
                 {
-                    if (_tape.transform.position.y < _lastTapeY)
+                    if (_tape.transform.localPosition.y < _lastTapeY)
                     {
                         PuttingTape = true;
-                        _lastTapeY = _tape.transform.position.y;
+                        _lastTapeY = _tape.transform.localPosition.y;
                         float percent = (_lastTapeY-_maskStartY)/(_maskEndY-_maskStartY);
                         _mask.position = new Vector2(_mask.position.x, 
                             Mathf.Lerp(_maskStartY,_maskEndY, percent));
 
-                        if (percent >= 1)
+                        if (percent >= 1 && !_tapeIsPutted)
                         {
+                            _tapeIsPutted = true;
                             _audioPlayer.Play(Sounds.TapePuttingEnd);
-                            OnTapePutted?.Invoke();
                         }
                     }
                 }
-                else
+                else if(collider == null)
                 {
                     PuttingTape = false;
                 }
@@ -85,6 +84,7 @@ namespace PackagingGame
             _mask.localPosition = _maskDefault;
             _lastTapeY = _mask.position.y;
             _tape.enabled = true;
+            _tapeIsPutted = false;
             _tape.ReturnToDefaultPosition();
         }
     }

@@ -7,29 +7,20 @@ namespace InputSystem
 {
     public class InputListener: MonoBehaviour
     {
-        private GlobalIInputActions _inputAction;
+        private TransitionLauncher _transitionLauncher;
         [SerializeField] private TaskCall _taskCall;
         
-        public void Construct()
+        public void Construct(TransitionLauncher transitionLauncher)
         {
-            _inputAction = new();
-            EnableReadingInput();
+            _transitionLauncher = transitionLauncher;
         }
 
         private void Update()
         {
             CallTask();
-        }
-
-        private void EnableReadingInput()
-        {
-            _inputAction.Enable();
+            MoveScreen();
         }
         
-        private void DisableReadingInput()
-        {
-            _inputAction.Disable();
-        }
         private void CallTask()
         {
             if (Input.GetKeyDown(KeyCode.Tab))
@@ -40,10 +31,18 @@ namespace InputSystem
                     _taskCall.TaskDisable();
             }
         }
-
-        private void OnDestroy()
+        
+        private void MoveScreen()
         {
-            DisableReadingInput();
+            float horizontalAxis = Input.GetAxisRaw("Horizontal");
+            if (horizontalAxis<0)
+            {
+                _transitionLauncher.MoveLeft();
+            }
+            else if (horizontalAxis>0)
+            {
+                _transitionLauncher.MoveRight();
+            }
         }
     }
 }

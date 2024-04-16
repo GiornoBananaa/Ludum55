@@ -20,6 +20,7 @@ namespace SummoningGame
         private bool _isLighted = false;
         private bool _isSetuped= false;
         private AudioPlayer _audioPlayer;
+        private Collider2D _candleStand;
         
         public event Action OnCandleSetup;
         public event Action OnCandleLighted;
@@ -75,6 +76,8 @@ namespace SummoningGame
                 _draggable.enabled = false;
                 transform.SetParent(collider.transform);
                 _isSetuped = true;
+                _candleStand = collider;
+                _candleStand.enabled = false;
                 OnCandleSetup?.Invoke();
             }
             else
@@ -95,7 +98,9 @@ namespace SummoningGame
                 _draggable.transform.SetParent(transform.parent.parent.parent);
                 _isSetuped = false;
             }
-            
+            if(_candleStand != null)
+                _candleStand.enabled = true;
+            _candleStand = null;
             ExtinguishCandle();
             _draggable.enabled = true;
             _draggable.ReturnToDefaultPosition();

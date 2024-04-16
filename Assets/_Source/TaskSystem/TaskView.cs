@@ -1,4 +1,5 @@
 ﻿using TMPro;
+using UI;
 using UnityEngine;
 
 namespace TaskSystem
@@ -6,6 +7,7 @@ namespace TaskSystem
     public class TaskView: MonoBehaviour
     {
         [SerializeField] private TMP_Text _taskText;
+        [SerializeField] private TaskCall _taskCall;
         
         public void SetTaskText(DemonPart head,DemonPart body,DemonPart legs,DemonPart headClothes,DemonPart bodyClothes,DemonPart legsClothes)
         {
@@ -19,6 +21,7 @@ namespace TaskSystem
                 $"Headdress - {headClothes.Descriptions[Random.Range(0, headClothes.Descriptions.Length)]}\n" +
                 $"Top - {bodyClothes.Descriptions[Random.Range(0, bodyClothes.Descriptions.Length)]}\n" +
                 $"Bottom - {legsClothes.Descriptions[Random.Range(0, legsClothes.Descriptions.Length)]}\n";
+            _taskCall.TaskEnable();
         }
     }
 }

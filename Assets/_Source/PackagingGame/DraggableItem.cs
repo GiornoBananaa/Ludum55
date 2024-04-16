@@ -2,6 +2,7 @@ using System;
 using AudioSystem;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace PackagingGame
 {
@@ -35,7 +36,7 @@ namespace PackagingGame
         
         public void OnMouseDown()
         {
-            if (!enabled || _isAnimation) return;
+            if (!enabled || _isAnimation || EventSystem.current.IsPointerOverGameObject()) return;
             if(_audioPlayer!= null)
                 _audioPlayer.Play(Sounds.ItemTake);
             IsDragged = true;
@@ -47,7 +48,7 @@ namespace PackagingGame
         
         public void OnMouseUp()
         {
-            if (!enabled || _isAnimation) return;
+            if (!enabled || _isAnimation || !IsDragged) return;
             if(_audioPlayer!= null)
                 _audioPlayer.Play(Sounds.ItemTake);
             IsDragged = false;

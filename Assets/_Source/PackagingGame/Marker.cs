@@ -1,4 +1,5 @@
-﻿using AudioSystem;
+﻿using System;
+using AudioSystem;
 using UnityEngine;
 
 namespace PackagingGame
@@ -29,6 +30,7 @@ namespace PackagingGame
         private void Start()
         {
             _camera = Camera.main;
+            _draggable.OnDragEnd += EndDrawing;
         }
         
         private void Update()
@@ -106,6 +108,11 @@ namespace PackagingGame
             if(_isDrawing)
                 EndDrawing();
             return false;
+        }
+
+        private void OnDestroy()
+        {
+            _draggable.OnDragEnd -= EndDrawing;
         }
     }
 }

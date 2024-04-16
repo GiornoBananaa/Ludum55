@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using GameStatesSystem;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -38,9 +40,9 @@ namespace CameraSystem
             _start = _currentCameraNode;
         }
 
-        public void MoveLeft()
+        public TweenerCore<Vector3,Vector3,VectorOptions> MoveLeft()
         {
-            if(IsMoving) return;
+            if(IsMoving) return null;
             var currPos = _currentCamera.transform.position;
             Vector2 newPos = new Vector2(currPos.x-_camerasMinDistance,currPos.y);
             if(_currentCameraNode.Previous == null)
@@ -55,12 +57,12 @@ namespace CameraSystem
                 _currentCameraNode = _currentCameraNode.Previous;
             }
             
-            MoveCamera(_currentCameraNode.Value.CameraFollowObject.transform.position);
+            return MoveCamera(_currentCameraNode.Value.CameraFollowObject.transform.position);
         }
     
-        public void MoveRight()
+        public TweenerCore<Vector3,Vector3,VectorOptions> MoveRight()
         {
-            if(IsMoving) return;
+            if(IsMoving) return null;
             var currPos = _currentCamera.transform.position;
             Vector2 newPos = new Vector2(currPos.x+_camerasMinDistance,currPos.y);
             if(_currentCameraNode.Next == null)
@@ -75,10 +77,10 @@ namespace CameraSystem
                 _currentCameraNode = _currentCameraNode.Next;
             }
             
-            MoveCamera(_currentCameraNode.Value.CameraFollowObject.transform.position);
+            return MoveCamera(_currentCameraNode.Value.CameraFollowObject.transform.position);
         }
 
-        public void MoveStart()
+        public TweenerCore<Vector3,Vector3,VectorOptions> MoveStart()
         {
             while (_currentCameraNode.Value != _start.Value)
             {
@@ -92,14 +94,19 @@ namespace CameraSystem
             
             _currentCameraNode.Value.CameraFollowObject.position = newPos;
             
-            MoveCamera(_currentCameraNode.Value.CameraFollowObject.transform.position);
+            return MoveCamera(_currentCameraNode.Value.CameraFollowObject.transform.position);
         }
         
         
-        private void MoveCamera(Vector2 position)
+        private TweenerCore<Vector3,Vector3,VectorOptions> MoveCamera(Vector2 position)
         {
             IsMoving = true;
-            _currentCamera.transform.DOMove(new Vector3(position.x,position.y,_currentCamera.transform.position.z),_switchDuration).OnComplete(()=>IsMoving=false);
+            TweenerCore<Vector3, Vector3, VectorOptions> tween =
+                _currentCamera.transform.DOMove(
+                    new Vector3(position.x, position.y, _currentCamera.transform.position.z),
+                    _switchDuration);
+            tween.onComplete += () => IsMoving = false;
+            return tween;
         }
     }
 }
