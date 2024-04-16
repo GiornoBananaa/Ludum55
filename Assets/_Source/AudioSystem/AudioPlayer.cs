@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,9 +28,7 @@ namespace AudioSystem
             
             _soundSources = new Dictionary<Sounds, AudioSource>();
             _spatialSources = new Dictionary<Sounds, AudioSource>();
-
-            PlayerPrefs.SetFloat("SoundVolume", 1f);
-            PlayerPrefs.SetFloat("MusicVolume", 1f);
+            
             SoundVolume = PlayerPrefs.GetFloat("SoundVolume",1f);
             MusicVolume = PlayerPrefs.GetFloat("MusicVolume",1f);
             
@@ -41,7 +40,19 @@ namespace AudioSystem
             SoundVolumeChange(SoundVolume);
             MusicVolumeChange(MusicVolume);
         }
-        
+
+        private void Start()
+        {
+            foreach (var sound in _sounds.Values)
+            {
+                if (sound.PlayOnAwake)
+                {
+                    Play(sound);
+                }
+            }
+            
+        }
+
         public void SoundVolumeChange(float volume)
         {
             SoundVolume = volume;
@@ -91,13 +102,10 @@ namespace AudioSystem
         
         private void AddSound(Sound sound)
         {
-            AudioSource source = gameObject.AddComponent<AudioSource>();
-            sound.SetSourceVariables(source,MusicVolume);
+            AudioSource source;
+            source = !sound.IsMusic ? gameObject.AddComponent<AudioSource>() : _musicSource;
+            if(!sound.IsMusic)sound.SetSourceVariables(source,MusicVolume);
             _soundSources.Add(sound.SoundType,source);
-            if (sound.PlayOnAwake)
-            {
-                Play(sound);
-            }
         }
         
         public void Play(Sound sound)

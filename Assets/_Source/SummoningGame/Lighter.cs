@@ -190,7 +190,7 @@ namespace SummoningGame
             }
             else
             {
-                _draggable.ReturnToDefaultPosition();
+                _box.ReturnToDefaultPosition();
             }
         }
         

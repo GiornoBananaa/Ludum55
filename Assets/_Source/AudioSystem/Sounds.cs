@@ -17,5 +17,6 @@ namespace AudioSystem
         PentagramActivation = 13,
         PackageSend = 14,
         ItemTake = 15,
+        Music = 16,
     }
 }

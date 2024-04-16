@@ -29,6 +29,7 @@ namespace AudioSystem
         {
             source.clip = Clip;
             source.loop = Loop;
+            source.playOnAwake = PlayOnAwake;
             source.pitch = Mathf.Clamp( Pitch + UnityEngine.Random.Range(-PitchVariation, PitchVariation), 0.1f, 3f);
             SetSourceVolume(source, generalVolume);
         }
